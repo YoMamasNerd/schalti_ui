@@ -133,6 +133,38 @@ a:hover {
   text-decoration: underline;
 }
 
+/* --- Typografie & Überschriften --- */
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  margin: 0 0 0.5em;
+  font-weight: 650;
+  color: var(--schalti-marke);
+}
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
+
+/* Einheitliches Fahrschul-Branding für alle Hauptüberschriften:
+   gesperrte Versalien über einem doppelten roten Strich (wie im Sumup-Gateway). */
+main h1,
+.schalti-title {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--schalti-marke);
+  border-bottom: 4px double var(--schalti-rot);
+  padding-bottom: 0.2rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+@media (max-width: 520px) {
+  main h1,
+  .schalti-title {
+    font-size: 1.35rem;
+    letter-spacing: 0.05em;
+  }
+}
+
 /* --- Kopfzeile & Navigation --- */
 .schalti-header {
   position: sticky;
