@@ -347,3 +347,93 @@ sl-card [slot="header"] {
   justify-content: space-between;
   font-weight: 600;
 }
+
+/* --- Stat Cards & Metriken --- */
+.stat-card {
+  background: var(--schalti-flaeche);
+  border: 1px solid var(--schalti-linie);
+  border-radius: var(--schalti-radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--schalti-schatten);
+}
+.stat-zahl {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--schalti-marke);
+  margin: 0.25rem 0;
+  line-height: 1.2;
+}
+.stat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--schalti-text-leise);
+  font-weight: 500;
+}
+.grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Filter-Pills --- */
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--schalti-radius-pill);
+  border: 1px solid var(--schalti-linie);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--schalti-text);
+  background: var(--schalti-flaeche);
+  transition: all 0.15s ease;
+}
+.filter-pill:hover {
+  background: var(--schalti-marke-hell);
+  text-decoration: none;
+}
+.filter-pill.ist-aktiv,
+.filter-pill.active {
+  background: var(--schalti-marke);
+  color: var(--schalti-auf-akzent);
+  border-color: var(--schalti-marke);
+}
+
+/* --- Matching & Score-Badges --- */
+.matching-box {
+  background: rgba(43, 88, 131, 0.04);
+  border: 1px dashed var(--schalti-linie);
+  border-radius: var(--schalti-radius-sm);
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--schalti-radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.score-high { background: var(--schalti-gruen-hell); color: var(--schalti-gruen-dunkel); }
+.score-med { background: var(--schalti-gelb-hell); color: var(--schalti-gelb); }
+.score-low { background: var(--schalti-rot-hell); color: var(--schalti-rot-dunkel); }
+.betrag-plus {
+  font-weight: 700;
+  color: var(--schalti-gruen);
+}
+

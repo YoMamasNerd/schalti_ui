@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{{ site_name|default:"Fahrschule Schaltwerk" }}{% endblock %}</title>
+  <title>{% block title %}{{ SITE_NAME|default:site_name|default:"Fahrschule Schaltwerk" }}{% endblock %}</title>
 
   <!-- Shoelace Basis-Styles -->
   <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/light.css' %}">
@@ -25,13 +25,13 @@
   <!-- Kopfzeile / Navigation -->
   <header class="schalti-header">
     <div class="schalti-nav-container">
-      <a href="/" class="schalti-brand">
+      <a href="{% block brand_url %}/{% endblock %}" class="schalti-brand">
         <!-- Rotes Akzent-Icon -->
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--schalti-rot)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <path d="M12 6v6l4 2"></path>
         </svg>
-        <span>{% block app_title %}Fahrschule Schaltwerk{% endblock %}</span>
+        <span>{% block app_title %}{{ SITE_NAME|default:site_name|default:"Fahrschule Schaltwerk" }}{% endblock %}</span>
       </a>
 
       <nav>
@@ -40,6 +40,7 @@
           <li><a href="/" class="schalti-nav-pill" aria-current="page">Dashboard</a></li>
           {% endblock %}
           
+          {% block user_menu %}
           {% if user.is_authenticated %}
             <li style="margin-left: 0.5rem;">
               <sl-dropdown>
@@ -56,6 +57,7 @@
               </sl-dropdown>
             </li>
           {% endif %}
+          {% endblock %}
         </ul>
       </nav>
     </div>
@@ -77,6 +79,12 @@
   <main class="schalti-main">
     {% block content %}{% endblock %}
   </main>
+
+  <footer class="schalti-footer" style="margin-top: auto; border-top: 1px solid var(--schalti-linie); padding: 1.5rem 1.25rem; text-align: center; color: var(--schalti-text-leise); font-size: 0.85rem;">
+    {% block footer %}
+      <span>{{ SITE_NAME|default:site_name|default:"Fahrschule Schaltwerk" }}</span>
+    {% endblock %}
+  </footer>
 
   {% block extra_scripts %}{% endblock %}
 </body>
