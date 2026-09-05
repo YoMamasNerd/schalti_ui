@@ -6,10 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</title>
 
-  <!-- Shoelace Basis-Styles -->
+  <!-- Shoelace Basis-Styles (hell + dunkel - dark.css zielt auf .sl-theme-dark
+       und ist ohne diese Klasse inert, siehe Theme-Script unten) -->
   <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/light.css' %}">
+  <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/dark.css' %}">
   <!-- Schalti Theme Tokens & Layout -->
   <link rel="stylesheet" href="{% static 'schalti_ui/css/schalti.css' %}">
+
+  <!-- Shoelace-Komponenten (Buttons, Dropdowns, Selects, ...) reagieren auf die
+       Klasse .sl-theme-dark auf <html>, nicht auf unser eigenes data-theme
+       Attribut. Dieses Skript haelt beides synchron: explizites data-theme
+       gewinnt, sonst folgt es live der Systemeinstellung. Laeuft synchron im
+       <head>, um einen Farb-Flackerer beim Laden zu vermeiden. -->
+  <script>
+    (function () {
+      var explicit = document.documentElement.getAttribute("data-theme");
+      var systemQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function applyDark(isDark) {
+        document.documentElement.classList.toggle("sl-theme-dark", isDark);
+      }
+      window.schaltiApplyShoelaceTheme = applyDark;
+
+      if (explicit === "dark") {
+        applyDark(true);
+      } else if (explicit === "light") {
+        applyDark(false);
+      } else {
+        applyDark(systemQuery.matches);
+        systemQuery.addEventListener("change", function (e) {
+          if (!document.documentElement.getAttribute("data-theme")) {
+            applyDark(e.matches);
+          }
+        });
+      }
+    })();
+  </script>
 
   <!-- Shoelace Web Components JS (ESM Bundle mit direkter Registrierung & Autoloader) -->
   <script type="module" src="{% static 'schalti_ui/js/shoelace-bundle.js' %}" data-shoelace="{% static 'schalti_ui/shoelace' %}"></script>
