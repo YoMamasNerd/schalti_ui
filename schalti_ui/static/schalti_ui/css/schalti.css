@@ -1,0 +1,312 @@
+/**
+ * Schalti UI - Design System & Shoelace Theme
+ * Basierend auf den Farben und der Typografie von https://www.fahrschule-schaltwerk.de/
+ */
+
+:root {
+  /* --- Schaltwerk Farb-Tokens --- */
+  --schalti-marke: #2b5883;
+  --schalti-marke-hell: #dbe8ef;
+  --schalti-marke-dunkel: #1f4467;
+  --schalti-auf-akzent: #ffffff;
+
+  --schalti-rot: #c72e2e;
+  --schalti-rot-hell: #fdecea;
+  --schalti-rot-dunkel: #a32424;
+
+  --schalti-gruen: #4a7c2f;
+  --schalti-gruen-hell: #d9ecc4;
+  --schalti-gruen-dunkel: #3f6329;
+
+  --schalti-gelb: #8a6100;
+  --schalti-gelb-hell: #ffebb6;
+
+  --schalti-text: #2b5883;
+  --schalti-text-leise: #4d6b87;
+  --schalti-linie: #cfdbe2;
+  --schalti-flaeche: #ffffff;
+  --schalti-grund: #ebefe7;
+
+  --schalti-radius: 10px;
+  --schalti-radius-sm: 6px;
+  --schalti-radius-pill: 9999px;
+  --schalti-schatten: 0 1px 3px rgba(20, 35, 25, 0.05), 0 6px 16px rgba(20, 35, 25, 0.06);
+
+  /* --- Shoelace Design-Tokens Überschreibung (Primary = Schaltwerk-Blau) --- */
+  --sl-color-primary-50:  #f0f5f8;
+  --sl-color-primary-100: #dbe8ef;
+  --sl-color-primary-200: #b8d2df;
+  --sl-color-primary-300: #8aaec4;
+  --sl-color-primary-400: #5b87a6;
+  --sl-color-primary-500: #3c6b93;
+  --sl-color-primary-600: #2b5883; /* Basis-Marke */
+  --sl-color-primary-700: #1f4467;
+  --sl-color-primary-800: #193550;
+  --sl-color-primary-900: #122437;
+  --sl-color-primary-950: #0a1420;
+
+  /* Danger = Schaltwerk-Rot */
+  --sl-color-danger-50:  #fdf3f2;
+  --sl-color-danger-100: #fdecea;
+  --sl-color-danger-500: #dc3535;
+  --sl-color-danger-600: #c72e2e;
+  --sl-color-danger-700: #a32424;
+
+  /* Success = Kalender-Grün */
+  --sl-color-success-50:  #f2f8ed;
+  --sl-color-success-100: #d9ecc4;
+  --sl-color-success-600: #4a7c2f;
+  --sl-color-success-700: #3f6329;
+
+  /* Warning = Schaltwerk-Gelb */
+  --sl-color-warning-50:  #fffaf0;
+  --sl-color-warning-100: #ffebb6;
+  --sl-color-warning-600: #8a6100;
+
+  /* Komponenten-Styles */
+  --sl-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sl-border-radius-small: var(--schalti-radius-sm);
+  --sl-border-radius-medium: var(--schalti-radius);
+  --sl-border-radius-large: 14px;
+  --sl-border-radius-pill: var(--schalti-radius-pill);
+  --sl-panel-background-color: var(--schalti-flaeche);
+  --sl-panel-border-color: var(--schalti-linie);
+  --sl-input-border-radius-medium: var(--schalti-radius-sm);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --schalti-marke: #8fb9e3;
+    --schalti-marke-hell: #1d2c3a;
+    --schalti-marke-dunkel: #b9d5f0;
+    --schalti-auf-akzent: #10202e;
+
+    --schalti-rot: #f2b8b5;
+    --schalti-rot-hell: #3a2220;
+    --schalti-rot-dunkel: #f9d8d6;
+
+    --schalti-gruen: #8fc46a;
+    --schalti-gruen-hell: #1e2a17;
+    --schalti-gruen-dunkel: #a9d68a;
+
+    --schalti-gelb: #e5c37c;
+    --schalti-gelb-hell: #33291480;
+
+    --schalti-text: #dde8ef;
+    --schalti-text-leise: #9db0be;
+    --schalti-linie: #2e3d48;
+    --schalti-flaeche: #1a242c;
+    --schalti-grund: #121a20;
+
+    --sl-panel-background-color: var(--schalti-flaeche);
+    --sl-panel-border-color: var(--schalti-linie);
+  }
+}
+
+/* --- Basis Layout --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sl-font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--schalti-text);
+  background: var(--schalti-grund);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--schalti-marke);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- Kopfzeile & Navigation --- */
+.schalti-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(235, 239, 231, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--schalti-linie);
+}
+
+@media (prefers-color-scheme: dark) {
+  .schalti-header {
+    background: rgba(18, 26, 32, 0.88);
+  }
+}
+
+.schalti-nav-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.schalti-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--schalti-marke);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.schalti-brand:hover {
+  text-decoration: none;
+}
+
+.schalti-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.schalti-nav-pill {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--schalti-radius-pill);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--schalti-text);
+  transition: all 0.15s ease;
+}
+.schalti-nav-pill:hover {
+  background: var(--schalti-marke-hell);
+  text-decoration: none;
+}
+.schalti-nav-pill[aria-current="page"] {
+  background: var(--schalti-marke);
+  color: var(--schalti-auf-akzent);
+}
+
+/* --- Hauptinhalt Container --- */
+.schalti-main {
+  flex: 1;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem 1.25rem;
+}
+
+/* --- Grids & Flexbox --- */
+.schalti-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.schalti-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.schalti-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* --- Tabellen Styling --- */
+.schalti-table-card {
+  background: var(--schalti-flaeche);
+  border-radius: var(--schalti-radius);
+  border: 1px solid var(--schalti-linie);
+  box-shadow: var(--schalti-schatten);
+  overflow: hidden;
+}
+
+.schalti-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.schalti-table th {
+  background: rgba(43, 88, 131, 0.05);
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--schalti-linie);
+}
+
+.schalti-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--schalti-linie);
+  vertical-align: middle;
+}
+
+.schalti-table tr:last-child td {
+  border-bottom: none;
+}
+
+.schalti-table tr:hover td {
+  background: rgba(43, 88, 131, 0.02);
+}
+
+/* --- Status Badges (Pillen) --- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--schalti-radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.status-pill.success {
+  background: var(--schalti-gruen-hell);
+  color: var(--schalti-gruen-dunkel);
+}
+.status-pill.danger {
+  background: var(--schalti-rot-hell);
+  color: var(--schalti-rot-dunkel);
+}
+.status-pill.warning {
+  background: var(--schalti-gelb-hell);
+  color: var(--schalti-gelb);
+}
+.status-pill.neutral {
+  background: var(--schalti-marke-hell);
+  color: var(--schalti-marke-dunkel);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-dot.green { background: #4a7c2f; }
+.status-dot.red { background: #c72e2e; }
+.status-dot.yellow { background: #d99b00; }
+.status-dot.blue { background: #2b5883; }
+
+/* Shoelace Card Customization */
+sl-card {
+  --border-radius: var(--schalti-radius);
+  --border-color: var(--schalti-linie);
+  box-shadow: var(--schalti-schatten);
+}
+
+sl-card [slot="header"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}

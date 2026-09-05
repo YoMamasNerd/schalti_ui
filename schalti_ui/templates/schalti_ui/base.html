@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_name|default:"Fahrschule Schaltwerk" }}{% endblock %}</title>
+
+  <!-- Shoelace Basis-Styles -->
+  <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/light.css' %}">
+  <!-- Schalti Theme Tokens & Layout -->
+  <link rel="stylesheet" href="{% static 'schalti_ui/css/schalti.css' %}">
+
+  <!-- Shoelace Web Components JS (ESM) -->
+  <script type="module" src="{% static 'schalti_ui/shoelace/shoelace.js' %}"></script>
+
+  <!-- HTMX & Schalti Bridge -->
+  <script src="{% static 'schalti_ui/htmx/htmx.min.js' %}"></script>
+  <script src="{% static 'schalti_ui/js/schalti.js' %}"></script>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+  <!-- Kopfzeile / Navigation -->
+  <header class="schalti-header">
+    <div class="schalti-nav-container">
+      <a href="/" class="schalti-brand">
+        <!-- Rotes Akzent-Icon -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--schalti-rot)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 6v6l4 2"></path>
+        </svg>
+        <span>{% block app_title %}Fahrschule Schaltwerk{% endblock %}</span>
+      </a>
+
+      <nav>
+        <ul class="schalti-nav-links">
+          {% block nav_items %}
+          <li><a href="/" class="schalti-nav-pill" aria-current="page">Dashboard</a></li>
+          {% endblock %}
+          
+          {% if user.is_authenticated %}
+            <li style="margin-left: 0.5rem;">
+              <sl-dropdown>
+                <sl-button slot="trigger" size="small" caret pill>
+                  <sl-icon slot="prefix" name="person-circle"></sl-icon>
+                  {{ user.first_name|default:user.username }}
+                </sl-button>
+                <sl-menu>
+                  {% if user.is_staff %}
+                    <sl-menu-item value="admin" href="/admin/">Django Admin</sl-menu-item>
+                  {% endif %}
+                  <sl-menu-item value="logout" href="/accounts/logout/">Abmelden</sl-menu-item>
+                </sl-menu>
+              </sl-dropdown>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Flash-Messages -->
+  {% if messages %}
+    <div style="max-width: 1240px; margin: 1rem auto 0 auto; padding: 0 1.25rem;">
+      {% for message in messages %}
+        <sl-alert variant="{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% else %}primary{% endif %}" open closable duration="5000">
+          <sl-icon slot="icon" name="info-circle"></sl-icon>
+          {{ message }}
+        </sl-alert>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Hauptinhalt -->
+  <main class="schalti-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
