@@ -103,6 +103,63 @@
   }
 }
 
+/* Explizite Theme-Wahl (z.B. via Benutzereinstellungen) ueberschreibt die
+   Systemeinstellung. Wird per data-theme Attribut auf <html> gesetzt; ohne
+   dieses Attribut greift weiterhin ausschliesslich prefers-color-scheme. */
+:root[data-theme="dark"] {
+  --schalti-marke: #8fb9e3;
+  --schalti-marke-hell: #1d2c3a;
+  --schalti-marke-dunkel: #b9d5f0;
+  --schalti-auf-akzent: #10202e;
+
+  --schalti-rot: #f2b8b5;
+  --schalti-rot-hell: #3a2220;
+  --schalti-rot-dunkel: #f9d8d6;
+
+  --schalti-gruen: #8fc46a;
+  --schalti-gruen-hell: #1e2a17;
+  --schalti-gruen-dunkel: #a9d68a;
+
+  --schalti-gelb: #e5c37c;
+  --schalti-gelb-hell: #33291480;
+
+  --schalti-text: #dde8ef;
+  --schalti-text-leise: #9db0be;
+  --schalti-linie: #2e3d48;
+  --schalti-flaeche: #1a242c;
+  --schalti-grund: #121a20;
+
+  --sl-panel-background-color: var(--schalti-flaeche);
+  --sl-panel-border-color: var(--schalti-linie);
+}
+
+:root[data-theme="light"] {
+  --schalti-marke: #2b5883;
+  --schalti-marke-hell: #dbe8ef;
+  --schalti-marke-dunkel: #1f4467;
+  --schalti-auf-akzent: #ffffff;
+
+  --schalti-rot: #c72e2e;
+  --schalti-rot-hell: #fdecea;
+  --schalti-rot-dunkel: #a32424;
+
+  --schalti-gruen: #4a7c2f;
+  --schalti-gruen-hell: #d9ecc4;
+  --schalti-gruen-dunkel: #3f6329;
+
+  --schalti-gelb: #8a6100;
+  --schalti-gelb-hell: #ffebb6;
+
+  --schalti-text: #2b5883;
+  --schalti-text-leise: #4d6b87;
+  --schalti-linie: #cfdbe2;
+  --schalti-flaeche: #ffffff;
+  --schalti-grund: #ebefe7;
+
+  --sl-panel-background-color: var(--schalti-flaeche);
+  --sl-panel-border-color: var(--schalti-linie);
+}
+
 /* Verhindert FOUC (Flash of Unstyled Content) bei noch nicht definierten Custom Elements */
 sl-dialog:not(:defined) {
   display: none !important;
@@ -180,6 +237,14 @@ main h1,
   .schalti-header {
     background: rgba(18, 26, 32, 0.88);
   }
+}
+
+:root[data-theme="dark"] .schalti-header {
+  background: rgba(18, 26, 32, 0.88);
+}
+
+:root[data-theme="light"] .schalti-header {
+  background: rgba(235, 239, 231, 0.88);
 }
 
 .schalti-nav-container {
