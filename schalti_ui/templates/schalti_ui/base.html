@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{{ SITE_NAME|default:site_name|default:"Fahrschule Schaltwerk" }}{% endblock %}</title>
+  <title>{% block title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</title>
 
   <!-- Shoelace Basis-Styles -->
   <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/light.css' %}">
@@ -31,7 +31,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <path d="M12 6v6l4 2"></path>
         </svg>
-        <span>{% block app_title %}{{ SITE_NAME|default:site_name|default:"Fahrschule Schaltwerk" }}{% endblock %}</span>
+        <span>{% block app_title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</span>
       </a>
 
       <nav>
@@ -82,7 +82,7 @@
 
   <footer class="schalti-footer" style="margin-top: auto; border-top: 1px solid var(--schalti-linie); padding: 1.5rem 1.25rem; text-align: center; color: var(--schalti-text-leise); font-size: 0.85rem;">
     {% block footer %}
-      <span>{{ SITE_NAME|default:site_name|default:"Fahrschule Schaltwerk" }}</span>
+      <span>{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}</span>
     {% endblock %}
   </footer>
 
