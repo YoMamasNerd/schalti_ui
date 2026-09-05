@@ -86,6 +86,18 @@
     {% endblock %}
   </footer>
 
+  <script>
+    // Automatisches Navigieren bei Klick auf sl-menu-item mit href oder URL-Value
+    document.addEventListener('sl-select', function(event) {
+      const item = event.detail.item;
+      if (!item) return;
+      const targetUrl = item.getAttribute('href') || (item.value && (item.value.startsWith('/') || item.value.startsWith('http')) ? item.value : null);
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    });
+  </script>
+
   {% block extra_scripts %}{% endblock %}
 </body>
 </html>
