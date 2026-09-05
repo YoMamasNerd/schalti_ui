@@ -103,6 +103,14 @@
   }
 }
 
+/* Verhindert FOUC (Flash of Unstyled Content) bei noch nicht definierten Custom Elements */
+sl-dialog:not(:defined) {
+  display: none !important;
+}
+:not(:defined) {
+  visibility: hidden;
+}
+
 /* --- Basis Layout --- */
 * {
   box-sizing: border-box;

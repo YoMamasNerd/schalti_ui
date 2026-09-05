@@ -11,8 +11,8 @@
   <!-- Schalti Theme Tokens & Layout -->
   <link rel="stylesheet" href="{% static 'schalti_ui/css/schalti.css' %}">
 
-  <!-- Shoelace Web Components JS (ESM) -->
-  <script type="module" src="{% static 'schalti_ui/shoelace/shoelace.js' %}"></script>
+  <!-- Shoelace Web Components JS (ESM Bundle mit direkter Registrierung & Autoloader) -->
+  <script type="module" src="{% static 'schalti_ui/js/shoelace-bundle.js' %}" data-shoelace="{% static 'schalti_ui/shoelace' %}"></script>
 
   <!-- HTMX & Schalti Bridge -->
   <script src="{% static 'schalti_ui/htmx/htmx.min.js' %}"></script>

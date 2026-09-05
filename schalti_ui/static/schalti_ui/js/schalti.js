@@ -17,16 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Hilfsfunktion zum Öffnen/Schließen von Shoelace Dialogen
-window.schaltiOpenDialog = function(dialogId) {
+window.schaltiOpenDialog = async function(dialogId) {
   const dlg = document.getElementById(dialogId);
-  if (dlg && typeof dlg.show === 'function') {
+  if (!dlg) return;
+  if (typeof dlg.show === 'function') {
     dlg.show();
+  } else {
+    await customElements.whenDefined('sl-dialog');
+    if (typeof dlg.show === 'function') {
+      dlg.show();
+    }
   }
 };
 
-window.schaltiCloseDialog = function(dialogId) {
+window.schaltiCloseDialog = async function(dialogId) {
   const dlg = document.getElementById(dialogId);
-  if (dlg && typeof dlg.hide === 'function') {
+  if (!dlg) return;
+  if (typeof dlg.hide === 'function') {
     dlg.hide();
+  } else {
+    await customElements.whenDefined('sl-dialog');
+    if (typeof dlg.hide === 'function') {
+      dlg.hide();
+    }
   }
 };
