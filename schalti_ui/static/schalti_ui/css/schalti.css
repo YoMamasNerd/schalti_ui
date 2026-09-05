@@ -48,20 +48,41 @@
   /* Danger = Schaltwerk-Rot */
   --sl-color-danger-50:  #fdf3f2;
   --sl-color-danger-100: #fdecea;
+  --sl-color-danger-200: #facdc8;
+  --sl-color-danger-300: #f5a7a0;
+  --sl-color-danger-400: #ed7367;
   --sl-color-danger-500: #dc3535;
   --sl-color-danger-600: #c72e2e;
   --sl-color-danger-700: #a32424;
+  --sl-color-danger-800: #832020;
+  --sl-color-danger-900: #641919;
+  --sl-color-danger-950: #370a0a;
 
   /* Success = Kalender-Grün */
   --sl-color-success-50:  #f2f8ed;
   --sl-color-success-100: #d9ecc4;
+  --sl-color-success-200: #bcdfa0;
+  --sl-color-success-300: #99cb77;
+  --sl-color-success-400: #74b250;
+  --sl-color-success-500: #579336;
   --sl-color-success-600: #4a7c2f;
   --sl-color-success-700: #3f6329;
+  --sl-color-success-800: #314b21;
+  --sl-color-success-900: #243619;
+  --sl-color-success-950: #141f0e;
 
   /* Warning = Schaltwerk-Gelb */
   --sl-color-warning-50:  #fffaf0;
   --sl-color-warning-100: #ffebb6;
+  --sl-color-warning-200: #fedb7d;
+  --sl-color-warning-300: #f0c447;
+  --sl-color-warning-400: #d9a924;
+  --sl-color-warning-500: #b5840d;
   --sl-color-warning-600: #8a6100;
+  --sl-color-warning-700: #6b4b00;
+  --sl-color-warning-800: #4f3700;
+  --sl-color-warning-900: #332300;
+  --sl-color-warning-950: #1d1400;
 
   /* Komponenten-Styles */
   --sl-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -75,7 +96,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root,
+  .sl-theme-dark {
     --schalti-marke: #8fb9e3;
     --schalti-marke-hell: #1d2c3a;
     --schalti-marke-dunkel: #b9d5f0;
@@ -100,13 +122,63 @@
 
     --sl-panel-background-color: var(--schalti-flaeche);
     --sl-panel-border-color: var(--schalti-linie);
+
+    /* Shoelace Design-Tokens im Dark Mode (50 = dunkle Flaeche, 900/950 = lesbare helle Schrift) */
+    --sl-color-primary-50:  #1d2c3a;
+    --sl-color-primary-100: #25394b;
+    --sl-color-primary-200: #314b62;
+    --sl-color-primary-300: #426380;
+    --sl-color-primary-400: #5b83a6;
+    --sl-color-primary-500: #749ec7;
+    --sl-color-primary-600: #8fb9e3;
+    --sl-color-primary-700: #b9d5f0;
+    --sl-color-primary-800: #d4e5f6;
+    --sl-color-primary-900: #e8f2fb;
+    --sl-color-primary-950: #f4f8fd;
+
+    --sl-color-danger-50:  #3a2220;
+    --sl-color-danger-100: #4d2d2a;
+    --sl-color-danger-200: #643834;
+    --sl-color-danger-300: #834742;
+    --sl-color-danger-400: #ab5b54;
+    --sl-color-danger-500: #d4736b;
+    --sl-color-danger-600: #f2b8b5;
+    --sl-color-danger-700: #f9d8d6;
+    --sl-color-danger-800: #fde8e7;
+    --sl-color-danger-900: #fdedec;
+    --sl-color-danger-950: #fff5f5;
+
+    --sl-color-success-50:  #1e2a17;
+    --sl-color-success-100: #25361c;
+    --sl-color-success-200: #2d4322;
+    --sl-color-success-300: #39552b;
+    --sl-color-success-400: #4d743a;
+    --sl-color-success-500: #689c4e;
+    --sl-color-success-600: #8fc46a;
+    --sl-color-success-700: #a9d68a;
+    --sl-color-success-800: #c5e5ae;
+    --sl-color-success-900: #e2f2d6;
+    --sl-color-success-950: #f1f9ec;
+
+    --sl-color-warning-50:  #332914;
+    --sl-color-warning-100: #473a1c;
+    --sl-color-warning-200: #5d4c24;
+    --sl-color-warning-300: #78622e;
+    --sl-color-warning-400: #997c39;
+    --sl-color-warning-500: #be9c48;
+    --sl-color-warning-600: #e5c37c;
+    --sl-color-warning-700: #eed49d;
+    --sl-color-warning-800: #f5e4bd;
+    --sl-color-warning-900: #fbf5e6;
+    --sl-color-warning-950: #fefbf5;
   }
 }
 
 /* Explizite Theme-Wahl (z.B. via Benutzereinstellungen) ueberschreibt die
    Systemeinstellung. Wird per data-theme Attribut auf <html> gesetzt; ohne
    dieses Attribut greift weiterhin ausschliesslich prefers-color-scheme. */
-:root[data-theme="dark"] {
+:root[data-theme="dark"],
+.sl-theme-dark {
   --schalti-marke: #8fb9e3;
   --schalti-marke-hell: #1d2c3a;
   --schalti-marke-dunkel: #b9d5f0;
@@ -131,6 +203,55 @@
 
   --sl-panel-background-color: var(--schalti-flaeche);
   --sl-panel-border-color: var(--schalti-linie);
+
+  /* Shoelace Design-Tokens im Dark Mode */
+  --sl-color-primary-50:  #1d2c3a;
+  --sl-color-primary-100: #25394b;
+  --sl-color-primary-200: #314b62;
+  --sl-color-primary-300: #426380;
+  --sl-color-primary-400: #5b83a6;
+  --sl-color-primary-500: #749ec7;
+  --sl-color-primary-600: #8fb9e3;
+  --sl-color-primary-700: #b9d5f0;
+  --sl-color-primary-800: #d4e5f6;
+  --sl-color-primary-900: #e8f2fb;
+  --sl-color-primary-950: #f4f8fd;
+
+  --sl-color-danger-50:  #3a2220;
+  --sl-color-danger-100: #4d2d2a;
+  --sl-color-danger-200: #643834;
+  --sl-color-danger-300: #834742;
+  --sl-color-danger-400: #ab5b54;
+  --sl-color-danger-500: #d4736b;
+  --sl-color-danger-600: #f2b8b5;
+  --sl-color-danger-700: #f9d8d6;
+  --sl-color-danger-800: #fde8e7;
+  --sl-color-danger-900: #fdedec;
+  --sl-color-danger-950: #fff5f5;
+
+  --sl-color-success-50:  #1e2a17;
+  --sl-color-success-100: #25361c;
+  --sl-color-success-200: #2d4322;
+  --sl-color-success-300: #39552b;
+  --sl-color-success-400: #4d743a;
+  --sl-color-success-500: #689c4e;
+  --sl-color-success-600: #8fc46a;
+  --sl-color-success-700: #a9d68a;
+  --sl-color-success-800: #c5e5ae;
+  --sl-color-success-900: #e2f2d6;
+  --sl-color-success-950: #f1f9ec;
+
+  --sl-color-warning-50:  #332914;
+  --sl-color-warning-100: #473a1c;
+  --sl-color-warning-200: #5d4c24;
+  --sl-color-warning-300: #78622e;
+  --sl-color-warning-400: #997c39;
+  --sl-color-warning-500: #be9c48;
+  --sl-color-warning-600: #e5c37c;
+  --sl-color-warning-700: #eed49d;
+  --sl-color-warning-800: #f5e4bd;
+  --sl-color-warning-900: #fbf5e6;
+  --sl-color-warning-950: #fefbf5;
 }
 
 :root[data-theme="light"] {
@@ -158,6 +279,58 @@
 
   --sl-panel-background-color: var(--schalti-flaeche);
   --sl-panel-border-color: var(--schalti-linie);
+
+  /* Primary Light */
+  --sl-color-primary-50:  #f0f5f8;
+  --sl-color-primary-100: #dbe8ef;
+  --sl-color-primary-200: #b8d2df;
+  --sl-color-primary-300: #8aaec4;
+  --sl-color-primary-400: #5b87a6;
+  --sl-color-primary-500: #3c6b93;
+  --sl-color-primary-600: #2b5883;
+  --sl-color-primary-700: #1f4467;
+  --sl-color-primary-800: #193550;
+  --sl-color-primary-900: #122437;
+  --sl-color-primary-950: #0a1420;
+
+  /* Danger Light */
+  --sl-color-danger-50:  #fdf3f2;
+  --sl-color-danger-100: #fdecea;
+  --sl-color-danger-200: #facdc8;
+  --sl-color-danger-300: #f5a7a0;
+  --sl-color-danger-400: #ed7367;
+  --sl-color-danger-500: #dc3535;
+  --sl-color-danger-600: #c72e2e;
+  --sl-color-danger-700: #a32424;
+  --sl-color-danger-800: #832020;
+  --sl-color-danger-900: #641919;
+  --sl-color-danger-950: #370a0a;
+
+  /* Success Light */
+  --sl-color-success-50:  #f2f8ed;
+  --sl-color-success-100: #d9ecc4;
+  --sl-color-success-200: #bcdfa0;
+  --sl-color-success-300: #99cb77;
+  --sl-color-success-400: #74b250;
+  --sl-color-success-500: #579336;
+  --sl-color-success-600: #4a7c2f;
+  --sl-color-success-700: #3f6329;
+  --sl-color-success-800: #314b21;
+  --sl-color-success-900: #243619;
+  --sl-color-success-950: #141f0e;
+
+  /* Warning Light */
+  --sl-color-warning-50:  #fffaf0;
+  --sl-color-warning-100: #ffebb6;
+  --sl-color-warning-200: #fedb7d;
+  --sl-color-warning-300: #f0c447;
+  --sl-color-warning-400: #d9a924;
+  --sl-color-warning-500: #b5840d;
+  --sl-color-warning-600: #8a6100;
+  --sl-color-warning-700: #6b4b00;
+  --sl-color-warning-800: #4f3700;
+  --sl-color-warning-900: #332300;
+  --sl-color-warning-950: #1d1400;
 }
 
 /* Verhindert FOUC (Flash of Unstyled Content) bei noch nicht definierten Custom Elements */
@@ -398,6 +571,64 @@ main h1,
 .status-dot.red { background: #c72e2e; }
 .status-dot.yellow { background: #d99b00; }
 .status-dot.blue { background: #2b5883; }
+
+/* --- Callout & Hinweis-Boxen --- */
+.schalti-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--schalti-radius-sm);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: 1px solid var(--schalti-linie);
+  background: var(--schalti-flaeche);
+  color: var(--schalti-text);
+}
+
+.schalti-callout sl-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.schalti-callout.success {
+  background: var(--schalti-gruen-hell);
+  border-color: var(--schalti-gruen);
+  color: var(--schalti-gruen-dunkel);
+}
+.schalti-callout.success sl-icon {
+  color: var(--schalti-gruen);
+}
+
+.schalti-callout.danger {
+  background: var(--schalti-rot-hell);
+  border-color: var(--schalti-rot);
+  color: var(--schalti-rot-dunkel);
+}
+.schalti-callout.danger sl-icon {
+  color: var(--schalti-rot);
+}
+
+.schalti-callout.warning {
+  background: var(--schalti-gelb-hell);
+  border-color: var(--schalti-gelb);
+  color: var(--schalti-gelb);
+}
+.schalti-callout.warning sl-icon {
+  color: var(--schalti-gelb);
+}
+
+.schalti-callout.info,
+.schalti-callout.neutral {
+  background: var(--schalti-marke-hell);
+  border-color: var(--schalti-marke);
+  color: var(--schalti-marke-dunkel);
+}
+.schalti-callout.info sl-icon,
+.schalti-callout.neutral sl-icon {
+  color: var(--schalti-marke);
+}
 
 /* Shoelace Card Customization */
 sl-card {
