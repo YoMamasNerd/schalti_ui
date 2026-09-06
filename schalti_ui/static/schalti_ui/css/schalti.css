@@ -952,3 +952,20 @@ sl-card [slot="header"] {
   color: var(--schalti-gruen);
 }
 
+/* --- Sekundaere Sub-Navigation --- */
+.schalti-subnav {
+  border-bottom: 1px solid var(--schalti-linie);
+  background: var(--schalti-flaeche);
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+}
+.schalti-subnav-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
