@@ -4,6 +4,8 @@ Zentrales Design-System und Komponenten-Paket für alle Schalti-Apps (`schalti_t
 
 Basierend auf **Shoelace Web Components**, **HTMX** und den Markenfarben von [fahrschule-schaltwerk.de](https://www.fahrschule-schaltwerk.de/).
 
+Alle vier Consumer-Repos sind auf `requirements.txt`-Ebene per Commit-Hash gepinnt und tracken diesen Branch automatisch per Renovate (`git-refs`-Datasource) - ein neuer Commit hier löst dort jeweils einen PR mit aktualisiertem Hash aus.
+
 ---
 
 ## 🚀 Installation & Einbindung
