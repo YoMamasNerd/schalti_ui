@@ -66,37 +66,26 @@
         <span>{% block app_title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</span>
       </a>
 
-      <nav class="schalti-nav">
-        <!-- Hamburger Button für Mobile (nur <= 768px sichtbar) -->
-        <sl-icon-button
-          name="list"
-          label="Menü öffnen"
-          class="schalti-nav-toggle"
-          aria-expanded="false"
-          aria-controls="schalti-nav-list"
-        ></sl-icon-button>
+      <!-- Bootstrap-Style Navbar Toggler Button (Mobile) -->
+      <button class="schalti-nav-toggler" type="button" aria-controls="schalti-nav-collapse" aria-expanded="false" aria-label="Navigation umschalten">
+        <span class="schalti-nav-toggler-icon">
+          <span></span>
+        </span>
+      </button>
 
-        <!-- Backdrop-Overlay für Mobile Offcanvas -->
-        <div class="schalti-nav-backdrop" aria-hidden="true"></div>
-
-        <ul class="schalti-nav-links" id="schalti-nav-list">
-          <li class="schalti-nav-drawer-header">
-            <span class="schalti-nav-drawer-title">Navigation</span>
-            <sl-icon-button
-              name="x-lg"
-              label="Menü schließen"
-              class="schalti-nav-close"
-            ></sl-icon-button>
-          </li>
-
+      <!-- Bootstrap-Style Navbar Collapse -->
+      <div class="schalti-nav-collapse" id="schalti-nav-collapse">
+        <ul class="schalti-nav-links">
           {% block nav_items %}
           <li><a href="/" class="schalti-nav-pill" aria-current="page">Dashboard</a></li>
           {% endblock %}
-          
+        </ul>
+
+        <ul class="schalti-nav-links schalti-nav-user">
           {% block user_menu %}
           {% if user.is_authenticated %}
             <li style="margin-left: 0.5rem;">
-              <sl-dropdown>
+              <sl-dropdown hoist>
                 <sl-button slot="trigger" size="small" caret pill>
                   <sl-icon slot="prefix" name="person-circle"></sl-icon>
                   {{ user.first_name|default:user.username }}
@@ -112,7 +101,7 @@
           {% endif %}
           {% endblock %}
         </ul>
-      </nav>
+      </div>
     </div>
   </header>
 

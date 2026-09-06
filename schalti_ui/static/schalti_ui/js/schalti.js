@@ -43,69 +43,65 @@ window.schaltiCloseDialog = async function(dialogId) {
   }
 };
 
-// Mobile Navigation Drawer Toggle, Backdrop & Escape-Handler
+// Bootstrap-Style Navbar Collapse
 document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('.schalti-header');
-  if (!header) return;
+  const togglers = document.querySelectorAll('.schalti-nav-toggler');
+  togglers.forEach((toggler) => {
+    const targetId = toggler.getAttribute('aria-controls') || 'schalti-nav-collapse';
+    const target = document.getElementById(targetId);
+    if (!target) return;
 
-  const toggle = header.querySelector('.schalti-nav-toggle');
-  const closeBtn = header.querySelector('.schalti-nav-close');
-  const backdrop = header.querySelector('.schalti-nav-backdrop');
-  const navList = header.querySelector('.schalti-nav-links');
-
-  function openNav() {
-    header.classList.add('nav-open');
-    document.body.classList.add('schalti-nav-locked');
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('name', 'x-lg');
-    }
-  }
-
-  function closeNav() {
-    header.classList.remove('nav-open');
-    document.body.classList.remove('schalti-nav-locked');
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('name', 'list');
-    }
-  }
-
-  if (toggle) {
-    toggle.addEventListener('click', (e) => {
+    toggler.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (header.classList.contains('nav-open')) {
-        closeNav();
-      } else {
-        openNav();
+      const isExpanded = toggler.getAttribute('aria-expanded') === 'true';
+      toggler.setAttribute('aria-expanded', String(!isExpanded));
+      target.classList.toggle('show');
+    });
+  });
+
+  // Klick außerhalb schließt Collapse (ignoriert Klicks innerhalb des Collapse oder Toggler)
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.schalti-nav-collapse.show').forEach((collapse) => {
+      const toggler = document.querySelector(`.schalti-nav-toggler[aria-controls="${collapse.id}"]`) || document.querySelector('.schalti-nav-toggler');
+      if (!collapse.contains(e.target) && (!toggler || !toggler.contains(e.target))) {
+        collapse.classList.remove('show');
+        if (toggler) toggler.setAttribute('aria-expanded', 'false');
       }
     });
-  }
+  });
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      closeNav();
-    });
-  }
-
-  if (backdrop) {
-    backdrop.addEventListener('click', closeNav);
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && header.classList.contains('nav-open')) {
-      closeNav();
+  // Klick auf Links schließt Collapse
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.schalti-nav-collapse a');
+    if (link && !link.closest('sl-dropdown')) {
+      document.querySelectorAll('.schalti-nav-collapse.show').forEach((collapse) => {
+        collapse.classList.remove('show');
+      });
+      document.querySelectorAll('.schalti-nav-toggler[aria-expanded="true"]').forEach((btn) => {
+        btn.setAttribute('aria-expanded', 'false');
+      });
     }
   });
 
-  // Automatisches Schließen bei Klick auf normale Links
-  if (navList) {
-    navList.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (link && !link.closest('sl-dropdown')) {
-        closeNav();
-      }
+  // Shoelace sl-select (z. B. Abmelden / Profil im sl-menu) schließt Collapse
+  document.addEventListener('sl-select', () => {
+    document.querySelectorAll('.schalti-nav-collapse.show').forEach((collapse) => {
+      collapse.classList.remove('show');
     });
-  }
+    document.querySelectorAll('.schalti-nav-toggler[aria-expanded="true"]').forEach((btn) => {
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Escape-Taste schließt Collapse
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.schalti-nav-collapse.show').forEach((collapse) => {
+        collapse.classList.remove('show');
+      });
+      document.querySelectorAll('.schalti-nav-toggler[aria-expanded="true"]').forEach((btn) => {
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 });
