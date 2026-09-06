@@ -42,3 +42,70 @@ window.schaltiCloseDialog = async function(dialogId) {
     }
   }
 };
+
+// Mobile Navigation Drawer Toggle, Backdrop & Escape-Handler
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.schalti-header');
+  if (!header) return;
+
+  const toggle = header.querySelector('.schalti-nav-toggle');
+  const closeBtn = header.querySelector('.schalti-nav-close');
+  const backdrop = header.querySelector('.schalti-nav-backdrop');
+  const navList = header.querySelector('.schalti-nav-links');
+
+  function openNav() {
+    header.classList.add('nav-open');
+    document.body.classList.add('schalti-nav-locked');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('name', 'x-lg');
+    }
+  }
+
+  function closeNav() {
+    header.classList.remove('nav-open');
+    document.body.classList.remove('schalti-nav-locked');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('name', 'list');
+    }
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (header.classList.contains('nav-open')) {
+        closeNav();
+      } else {
+        openNav();
+      }
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeNav();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeNav);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('nav-open')) {
+      closeNav();
+    }
+  });
+
+  // Automatisches Schließen bei Klick auf normale Links
+  if (navList) {
+    navList.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && !link.closest('sl-dropdown')) {
+        closeNav();
+      }
+    });
+  }
+});

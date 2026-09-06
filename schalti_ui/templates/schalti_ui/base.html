@@ -66,8 +66,29 @@
         <span>{% block app_title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</span>
       </a>
 
-      <nav>
-        <ul class="schalti-nav-links">
+      <nav class="schalti-nav">
+        <!-- Hamburger Button für Mobile (nur <= 768px sichtbar) -->
+        <sl-icon-button
+          name="list"
+          label="Menü öffnen"
+          class="schalti-nav-toggle"
+          aria-expanded="false"
+          aria-controls="schalti-nav-list"
+        ></sl-icon-button>
+
+        <!-- Backdrop-Overlay für Mobile Offcanvas -->
+        <div class="schalti-nav-backdrop" aria-hidden="true"></div>
+
+        <ul class="schalti-nav-links" id="schalti-nav-list">
+          <li class="schalti-nav-drawer-header">
+            <span class="schalti-nav-drawer-title">Navigation</span>
+            <sl-icon-button
+              name="x-lg"
+              label="Menü schließen"
+              class="schalti-nav-close"
+            ></sl-icon-button>
+          </li>
+
           {% block nav_items %}
           <li><a href="/" class="schalti-nav-pill" aria-current="page">Dashboard</a></li>
           {% endblock %}
