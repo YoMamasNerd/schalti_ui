@@ -58,12 +58,14 @@
   <header class="schalti-header">
     <div class="schalti-nav-container">
       <a href="{% block brand_url %}/{% endblock %}" class="schalti-brand">
+        {% block brand_content %}
         <!-- Rotes Akzent-Icon -->
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--schalti-rot)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <path d="M12 6v6l4 2"></path>
         </svg>
         <span>{% block app_title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</span>
+        {% endblock %}
       </a>
 
       <!-- Bootstrap-Style Navbar Toggler Button (Mobile) -->
