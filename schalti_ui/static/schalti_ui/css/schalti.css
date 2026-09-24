@@ -514,8 +514,8 @@ main h1,
 
   .schalti-brand {
     font-size: 1.1rem;
+    flex: 1 1 0;
     min-width: 0;
-    max-width: calc(100% - 56px);
     flex-shrink: 1;
   }
 
@@ -523,6 +523,18 @@ main h1,
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  /* Toggler nur zeigen, wenn nav_items tatsächlich Links liefern
+     (Apps mit Subnav haben ein leeres Collapse – kein leerer Hamburger) */
+  .schalti-nav-toggler:has(~ .schalti-nav-collapse:not(:has(.schalti-nav-pill))) {
+    display: none;
+  }
+
+  /* Panel am rechten Viewport-Rand ausrichten, wenn der Switcher rechts steht */
+  .schalti-app-switcher-panel {
+    left: auto;
+    right: 0;
   }
 
   .schalti-nav-toggler {
