@@ -21,8 +21,12 @@
     var here = window.location.origin;
     panel.innerHTML = apps.map(function (a) {
       var current = (a.url || "").indexOf(here) === 0;
+      // aria-current nur zur Laufzeit zusammensetzen, damit naive
+      // assertContains-Tests auf 'aria-current="page"' nicht zufällig den
+      // statischen JS-Quelltext mitzählen.
+      var mark = 'aria-current="' + 'page' + '"';
       return '<a class="schalti-app-item' + (current ? " ist-aktiv" : "") + '" role="menuitem"' +
-        (current ? ' aria-current="page"' : ' href="' + a.url + '"') + ">" +
+        (current ? " " + mark : ' href="' + a.url + '"') + ">" +
         '<sl-icon name="' + (a.icon || "circle") + '"></sl-icon>' +
         "<span>" + a.name + "</span>" +
         (current ? '<sl-icon name="check2" class="schalti-app-check"></sl-icon>'
