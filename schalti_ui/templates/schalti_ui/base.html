@@ -68,6 +68,10 @@
         {% endblock %}
       </a>
 
+      {% block app_switcher %}
+        {% include "schalti_ui/app_switcher.html" %}
+      {% endblock %}
+
       <!-- Bootstrap-Style Navbar Toggler Button (Mobile) -->
       <button class="schalti-nav-toggler" type="button" aria-controls="schalti-nav-collapse" aria-expanded="false" aria-label="Navigation umschalten">
         <span class="schalti-nav-toggler-icon">

@@ -971,3 +971,50 @@ sl-card [slot="header"] {
   gap: 0.5rem;
 }
 
+
+/* --- App-Switcher (Registry-basiert, siehe app_switcher.html) --- */
+.schalti-app-switcher { position: relative; }
+.schalti-app-switcher-trigger {
+  display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+  padding: 0.35rem 0.7rem; border-radius: var(--schalti-radius-pill);
+  border: 1px solid var(--schalti-linie); background: var(--schalti-flaeche);
+  font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--schalti-text);
+  transition: all 0.15s ease;
+}
+.schalti-app-switcher-trigger:hover { background: var(--schalti-marke-hell); }
+.schalti-app-switcher-panel {
+  position: absolute; top: calc(100% + 0.45rem); left: 0; min-width: 215px; z-index: 110;
+  background: var(--schalti-flaeche); border: 1px solid var(--schalti-linie);
+  border-radius: var(--schalti-radius); box-shadow: var(--schalti-schatten); padding: 0.35rem;
+}
+.schalti-app-item {
+  display: flex; align-items: center; gap: 0.55rem; padding: 0.5rem 0.65rem;
+  border-radius: var(--schalti-radius-sm); text-decoration: none;
+  font-size: 0.88rem; font-weight: 500; color: var(--schalti-text);
+}
+.schalti-app-item:hover { background: var(--schalti-marke-hell); }
+.schalti-app-item.ist-aktiv {
+  background: var(--schalti-marke-hell); color: var(--schalti-marke-dunkel); font-weight: 700;
+}
+.schalti-app-item sl-icon { font-size: 1rem; color: var(--schalti-marke); }
+.schalti-app-check { margin-left: auto; }
+.schalti-app-hint {
+  margin-left: auto; font-size: 0.68rem; color: var(--schalti-text-leise);
+  border: 1px solid var(--schalti-linie); border-radius: var(--schalti-radius-pill);
+  padding: 0.05rem 0.45rem;
+}
+@media (max-width: 768px) {
+  .schalti-app-switcher-label { display: none; }
+}
+
+/* --- Subnav mobil: horizontale Scroll-Pills (ein Tap = Navigation) --- */
+@media (max-width: 768px) {
+  .schalti-subnav-container {
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity; scrollbar-width: none;
+  }
+  .schalti-subnav-container::-webkit-scrollbar { display: none; }
+  .schalti-subnav-container .filter-pill {
+    flex: 0 0 auto; scroll-snap-align: start;
+  }
+}
