@@ -72,6 +72,29 @@
         {% include "schalti_ui/app_switcher.html" %}
       {% endblock %}
 
+      <!-- User-Bereich: bleibt außerhalb des Mobile-Collapse, damit die
+           User-Pill (Einstellungen/Benutzerverwaltung) immer sichtbar bleibt -->
+      <ul class="schalti-nav-links schalti-nav-user">
+        {% block user_menu %}
+        {% if user.is_authenticated %}
+          <li style="margin-left: 0.5rem;">
+            <sl-dropdown hoist>
+              <sl-button slot="trigger" size="small" caret pill>
+                <sl-icon slot="prefix" name="person-circle"></sl-icon>
+                {{ user.first_name|default:user.username }}
+              </sl-button>
+              <sl-menu>
+                {% if user.is_staff %}
+                  <sl-menu-item value="admin" href="/admin/">Django Admin</sl-menu-item>
+                {% endif %}
+                <sl-menu-item value="logout" href="/accounts/logout/">Abmelden</sl-menu-item>
+              </sl-menu>
+            </sl-dropdown>
+          </li>
+        {% endif %}
+        {% endblock %}
+      </ul>
+
       <!-- Bootstrap-Style Navbar Toggler Button (Mobile) -->
       <button class="schalti-nav-toggler" type="button" aria-controls="schalti-nav-collapse" aria-expanded="false" aria-label="Navigation umschalten">
         <span class="schalti-nav-toggler-icon">
@@ -84,27 +107,6 @@
         <ul class="schalti-nav-links">
           {% block nav_items %}
           <li><a href="/" class="schalti-nav-pill" aria-current="page">Dashboard</a></li>
-          {% endblock %}
-        </ul>
-
-        <ul class="schalti-nav-links schalti-nav-user">
-          {% block user_menu %}
-          {% if user.is_authenticated %}
-            <li style="margin-left: 0.5rem;">
-              <sl-dropdown hoist>
-                <sl-button slot="trigger" size="small" caret pill>
-                  <sl-icon slot="prefix" name="person-circle"></sl-icon>
-                  {{ user.first_name|default:user.username }}
-                </sl-button>
-                <sl-menu>
-                  {% if user.is_staff %}
-                    <sl-menu-item value="admin" href="/admin/">Django Admin</sl-menu-item>
-                  {% endif %}
-                  <sl-menu-item value="logout" href="/accounts/logout/">Abmelden</sl-menu-item>
-                </sl-menu>
-              </sl-dropdown>
-            </li>
-          {% endif %}
           {% endblock %}
         </ul>
       </div>
