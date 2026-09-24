@@ -1,0 +1,62 @@
+{% if SCHALTI_APPS_REGISTRY_URL %}
+<div class="schalti-app-switcher" data-registry="{{ SCHALTI_APPS_REGISTRY_URL }}">
+  <button type="button" class="schalti-app-switcher-trigger" aria-haspopup="true" aria-expanded="false" aria-label="App wechseln">
+    <sl-icon name="grid-3x3-gap-fill"></sl-icon>
+    <span class="schalti-app-switcher-label">Apps</span>
+    <sl-icon name="chevron-down" style="font-size: 0.7rem;"></sl-icon>
+  </button>
+  <div class="schalti-app-switcher-panel" role="menu" hidden>
+    <sl-spinner style="font-size: 1rem;"></sl-spinner>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.currentScript.previousElementSibling;
+  var trigger = root.querySelector(".schalti-app-switcher-trigger");
+  var panel = root.querySelector(".schalti-app-switcher-panel");
+  var registryUrl = root.getAttribute("data-registry");
+
+  function render(apps) {
+    var here = window.location.origin;
+    panel.innerHTML = apps.map(function (a) {
+      var current = (a.url || "").indexOf(here) === 0;
+      return '<a class="schalti-app-item' + (current ? " ist-aktiv" : "") + '" role="menuitem"' +
+        (current ? ' aria-current="page"' : ' href="' + a.url + '"') + ">" +
+        '<sl-icon name="' + (a.icon || "circle") + '"></sl-icon>' +
+        "<span>" + a.name + "</span>" +
+        (current ? '<sl-icon name="check2" class="schalti-app-check"></sl-icon>'
+                 : (a.hint ? '<span class="schalti-app-hint">' + a.hint + "</span>" : "")) +
+        "</a>";
+    }).join("");
+  }
+
+  // ponytail: sessionStorage-Cache ohne Invalidierung – Registry-Änderungen
+  // wirken spätestens bei der nächsten Navigation; HTTP-Cache ist max-age=300.
+  var cached = sessionStorage.getItem("schalti_apps_registry");
+  if (cached) {
+    try { render(JSON.parse(cached)); } catch (e) { /* refetch unten */ }
+  }
+  fetch(registryUrl)
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (apps) {
+      sessionStorage.setItem("schalti_apps_registry", JSON.stringify(apps));
+      render(apps);
+    })
+    .catch(function () {
+      if (!cached) { root.hidden = true; }
+    });
+
+  trigger.addEventListener("click", function (e) {
+    e.stopPropagation();
+    var open = panel.hidden;
+    panel.hidden = !open;
+    trigger.setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", function () {
+    panel.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+  });
+})();
+</script>
+{% endif %}
