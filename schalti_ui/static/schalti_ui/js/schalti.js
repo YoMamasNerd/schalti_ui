@@ -172,3 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Toggler verstecken, wenn das Collapse keine Navigations-Punkte enthält
+// (Apps mit Subnav lassen nav_items leer – sonst bleibt ein leerer Hamburger).
+// CSS :has(:not(:has())) wird vom Chromium-Parser abgelehnt, daher per JS.
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.schalti-nav-collapse').forEach((collapse) => {
+    if (!collapse.querySelector('.schalti-nav-pill')) {
+      const toggler = document.querySelector('.schalti-nav-toggler[aria-controls="' + collapse.id + '"]');
+      if (toggler) toggler.hidden = true;
+    }
+  });
+});
