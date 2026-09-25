@@ -670,6 +670,9 @@ main h1,
 
   .schalti-nav-user > li {
     margin-left: 0 !important;
+    /* width:100% von .schalti-nav-links > li würde hier jedes Element
+       auf eine eigene Zeile zwingen (Toggle über der User-Pill) */
+    width: auto !important;
   }
 }
 
