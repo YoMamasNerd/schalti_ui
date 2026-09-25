@@ -821,7 +821,7 @@ sl-card [slot="header"] {
 /* --- App-Switcher (Registry-basiert, siehe app_switcher.html) --- */
 .schalti-app-switcher {
   position: relative;
-  margin-left: 0.85rem;
+  margin-left: 1.25rem;
 }
 .schalti-app-switcher-trigger {
   display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
@@ -853,7 +853,7 @@ sl-card [slot="header"] {
   padding: 0.05rem 0.45rem;
 }
 @media (max-width: 768px) {
-  .schalti-app-switcher { margin-left: 0.5rem; }
+  .schalti-app-switcher { margin-left: 0.75rem; }
   .schalti-app-switcher-label { display: none; }
 }
 
