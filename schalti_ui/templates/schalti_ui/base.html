@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/light.css' %}">
   <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/dark.css' %}">
   <!-- Schalti Theme Tokens & Layout -->
-  <link rel="stylesheet" href="{% static 'schalti_ui/css/schalti.css' %}?v=20260925-3">
+  <link rel="stylesheet" href="{% static 'schalti_ui/css/schalti.css' %}?v=20260925-4">
 
   <!-- Shoelace-Komponenten (Buttons, Dropdowns, Selects, ...) reagieren auf die
        Klasse .sl-theme-dark auf <html>, nicht auf unser eigenes data-theme
@@ -48,7 +48,7 @@
 
   <!-- HTMX & Schalti Bridge -->
   <script src="{% static 'schalti_ui/htmx/htmx.min.js' %}"></script>
-  <script src="{% static 'schalti_ui/js/schalti.js' %}?v=20260925-3"></script>
+  <script src="{% static 'schalti_ui/js/schalti.js' %}?v=20260925-4"></script>
 
   {% block extra_head %}{% endblock %}
 </head>
@@ -72,16 +72,7 @@
         {% include "schalti_ui/app_switcher.html" %}
       {% endblock %}
 
-      <!-- Bootstrap-Style Navbar Collapse -->
-      <div class="schalti-nav-collapse" id="schalti-nav-collapse">
-        <ul class="schalti-nav-links">
-          {% block nav_items %}{% endblock %}
-        </ul>
-      </div>
-
-      <!-- User-Bereich (Theme-Toggle, User-Pill): rechts, immer sichtbar.
-           Steht NACH dem Collapse, damit dessen flex-grow den freien Platz
-           verbraucht und margin-left:auto die User-Nav an den rechten Rand schiebt. -->
+      <!-- User-Bereich (Theme-Toggle, User-Pill): rechts, immer sichtbar. -->
       <ul class="schalti-nav-links schalti-nav-user">
         {% block user_menu %}
         {% if user.is_authenticated %}
@@ -103,12 +94,6 @@
         {% endblock %}
       </ul>
 
-      <!-- Bootstrap-Style Navbar Toggler Button (Mobile) -->
-      <button class="schalti-nav-toggler" type="button" aria-controls="schalti-nav-collapse" aria-expanded="false" aria-label="Navigation umschalten">
-        <span class="schalti-nav-toggler-icon">
-          <span></span>
-        </span>
-      </button>
     </div>
   </header>
 
