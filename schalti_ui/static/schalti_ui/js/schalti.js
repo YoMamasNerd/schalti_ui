@@ -14,6 +14,64 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Smart Sticky Subnavbar (Hide on scroll down, Reveal on scroll up)
+  const subnav = document.querySelector('.schalti-subnav');
+  const header = document.querySelector('.schalti-header');
+
+  if (subnav && header) {
+    let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+    let ticking = false;
+    const scrollThreshold = 8; // Mindestabstand in px, um Zickzack-Flackern zu vermeiden
+
+    function updateHeaderHeight() {
+      const h = header.offsetHeight;
+      document.documentElement.style.setProperty('--schalti-header-height', `${h}px`);
+    }
+
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight, { passive: true });
+    window.addEventListener('load', updateHeaderHeight, { passive: true });
+    if (window.ResizeObserver) {
+      new ResizeObserver(updateHeaderHeight).observe(header);
+    }
+
+    function onScroll() {
+      const currentScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+      const headerHeight = header.offsetHeight;
+      const scrollDiff = currentScrollY - lastScrollY;
+
+      // Dropdown-Interaktion nicht unterbrechen
+      if (subnav.querySelector('sl-dropdown[open]')) {
+        lastScrollY = currentScrollY;
+        ticking = false;
+        return;
+      }
+
+      // Ganz oben auf der Seite immer sichtbar
+      if (currentScrollY <= headerHeight) {
+        subnav.classList.remove('schalti-subnav--hidden');
+      } else if (Math.abs(scrollDiff) >= scrollThreshold) {
+        if (scrollDiff > 0) {
+          // Nach unten gescrollt -> ausblenden
+          subnav.classList.add('schalti-subnav--hidden');
+        } else {
+          // Nach oben gescrollt -> einblenden
+          subnav.classList.remove('schalti-subnav--hidden');
+        }
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
 });
 
 // Hilfsfunktion zum Öffnen/Schließen von Shoelace Dialogen

@@ -802,10 +802,20 @@ sl-card [slot="header"] {
 
 /* --- Sekundaere Sub-Navigation --- */
 .schalti-subnav {
+  position: sticky;
+  top: var(--schalti-header-height, 57px);
+  z-index: 95;
   border-bottom: 1px solid var(--schalti-linie);
   background: var(--schalti-flaeche);
   padding: 0.5rem 0;
   margin-bottom: 0.5rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  will-change: transform;
+}
+.schalti-subnav.schalti-subnav--hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 .schalti-subnav-container {
   max-width: 1240px;
