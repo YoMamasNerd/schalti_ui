@@ -29,5 +29,22 @@ jobs:
       - name: Lint (ruff)
         run: ruff check --output-format=github .
 
+      # pytest schreibt bei Fehlschlag die wichtigsten Zeilen (Zusammenfassung,
+      # Traceback-Details, Exceptions) als GitHub-Annotations, damit die
+      # Ursache direkt im Checks-Tab sichtbar ist statt nur im Job-Log.
       - name: Tests (pytest)
-        run: pytest -v
+        run: |
+          status=0
+          pytest -v --tb=short > pytest_output.txt 2>&1 || status=$?
+          cat pytest_output.txt
+          if [ $status -ne 0 ]; then
+            echo "pytest fehlgeschlagen (Exit $status)."
+            {
+              grep -E "^(FAILED|ERROR|INTERNALERROR)" pytest_output.txt || true
+              grep -E "^E " pytest_output.txt || true
+              grep -E "(Error|Exception)[: ]" pytest_output.txt | head -10 || true
+            } | head -25 | while IFS= read -r line; do
+              echo "::error title=pytest::$line"
+            done
+            exit 1
+          fi
