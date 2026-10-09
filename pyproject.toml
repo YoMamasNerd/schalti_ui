@@ -22,6 +22,16 @@ dependencies = [
     "django>=4.2",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    # Bewusst exakt gepinnt: Das Linter-Verhalten (und damit die CI) muss
+    # deterministisch sein. Ruffs Default-Regelset wurde 2026 massiv
+    # erweitert - Updates gehören bewusst in einen Commit, nicht per Zufall
+    # in den CI-Lauf.
+    "ruff==0.17.0",
+]
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["schalti_ui*"]
@@ -50,3 +60,12 @@ schalti_ui = [
 
 [tool.ruff]
 line-length = 110
+
+[tool.ruff.lint]
+# Bewusst explizit gepinnt statt des Ruff-Defaults: Das Default-Regelset
+# wurde 2026 auf über 400 Regeln erweitert (u.a. flake8-pytest-style, refurb,
+# Pylint-Serien) - ungepinnte CI-Läufe brechen damit unvorhersehbar bei
+# Ruff-Updates. Klassisches, stabiles Set:
+# E4/E7/E9 (pycodestyle-Kern) + F (Pyflakes) + B (Bugbear)
+# + I (Import-Sorting) + UP (pyupgrade).
+select = ["E4", "E7", "E9", "F", "B", "I", "UP"]

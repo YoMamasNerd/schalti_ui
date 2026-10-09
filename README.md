@@ -71,7 +71,7 @@ TEMPLATES = [
 ## 🧪 Tests & Lint
 
 ```bash
-pip install -e . pytest ruff
+pip install -e ".[dev]"
 pytest -v
 ruff check .
 ```
