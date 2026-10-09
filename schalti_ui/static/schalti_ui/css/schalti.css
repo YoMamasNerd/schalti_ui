@@ -1,88 +1,97 @@
 /**
  * Schalti UI - Design System & Shoelace Theme
  * Basierend auf den Farben und der Typografie von https://www.fahrschule-schaltwerk.de/
+ *
+ * Dark Mode: Alle Farb-Tokens nutzen light-dark() und folgen damit automatisch
+ * der Systemeinstellung (color-scheme). Eine explizite Wahl über
+ * data-theme="dark"/"light" auf <html> (siehe Theme-Script in base.html)
+ * überschreibt die Systemeinstellung.
+ * Benötigt Chrome/Edge >= 123, Firefox >= 120, Safari >= 17.5.
  */
 
 :root {
+  color-scheme: light dark;
+
   /* --- Schaltwerk Farb-Tokens --- */
-  --schalti-marke: #2b5883;
-  --schalti-marke-hell: #dbe8ef;
-  --schalti-marke-dunkel: #1f4467;
-  --schalti-auf-akzent: #ffffff;
+  --schalti-marke: light-dark(#2b5883, #8fb9e3);
+  --schalti-marke-hell: light-dark(#dbe8ef, #1d2c3a);
+  --schalti-marke-dunkel: light-dark(#1f4467, #b9d5f0);
+  --schalti-auf-akzent: light-dark(#ffffff, #10202e);
 
-  --schalti-rot: #c72e2e;
-  --schalti-rot-hell: #fdecea;
-  --schalti-rot-dunkel: #a32424;
+  --schalti-rot: light-dark(#c72e2e, #f2b8b5);
+  --schalti-rot-hell: light-dark(#fdecea, #3a2220);
+  --schalti-rot-dunkel: light-dark(#a32424, #f9d8d6);
 
-  --schalti-gruen: #4a7c2f;
-  --schalti-gruen-hell: #d9ecc4;
-  --schalti-gruen-dunkel: #3f6329;
+  --schalti-gruen: light-dark(#4a7c2f, #8fc46a);
+  --schalti-gruen-hell: light-dark(#d9ecc4, #1e2a17);
+  --schalti-gruen-dunkel: light-dark(#3f6329, #a9d68a);
 
-  --schalti-gelb: #8a6100;
-  --schalti-gelb-hell: #ffebb6;
+  --schalti-gelb: light-dark(#8a6100, #e5c37c);
+  --schalti-gelb-hell: light-dark(#ffebb6, #33291480);
 
-  --schalti-text: #2b5883;
-  --schalti-text-leise: #4d6b87;
-  --schalti-linie: #cfdbe2;
-  --schalti-flaeche: #ffffff;
-  --schalti-grund: #ebefe7;
+  --schalti-text: light-dark(#2b5883, #dde8ef);
+  --schalti-text-leise: light-dark(#4d6b87, #9db0be);
+  --schalti-linie: light-dark(#cfdbe2, #2e3d48);
+  --schalti-flaeche: light-dark(#ffffff, #1a242c);
+  --schalti-grund: light-dark(#ebefe7, #121a20);
 
   --schalti-radius: 10px;
   --schalti-radius-sm: 6px;
   --schalti-radius-pill: 9999px;
   --schalti-schatten: 0 1px 3px rgba(20, 35, 25, 0.05), 0 6px 16px rgba(20, 35, 25, 0.06);
 
-  /* --- Shoelace Design-Tokens Überschreibung (Primary = Schaltwerk-Blau) --- */
-  --sl-color-primary-50:  #f0f5f8;
-  --sl-color-primary-100: #dbe8ef;
-  --sl-color-primary-200: #b8d2df;
-  --sl-color-primary-300: #8aaec4;
-  --sl-color-primary-400: #5b87a6;
-  --sl-color-primary-500: #3c6b93;
-  --sl-color-primary-600: #2b5883; /* Basis-Marke */
-  --sl-color-primary-700: #1f4467;
-  --sl-color-primary-800: #193550;
-  --sl-color-primary-900: #122437;
-  --sl-color-primary-950: #0a1420;
+  /* --- Shoelace Design-Tokens Überschreibung --- */
+  /* Primary = Schaltwerk-Blau */
+  --sl-color-primary-50:  light-dark(#f0f5f8, #1d2c3a);
+  --sl-color-primary-100: light-dark(#dbe8ef, #25394b);
+  --sl-color-primary-200: light-dark(#b8d2df, #314b62);
+  --sl-color-primary-300: light-dark(#8aaec4, #426380);
+  --sl-color-primary-400: light-dark(#5b87a6, #5b83a6);
+  --sl-color-primary-500: light-dark(#3c6b93, #749ec7);
+  --sl-color-primary-600: light-dark(#2b5883, #8fb9e3); /* Basis-Marke */
+  --sl-color-primary-700: light-dark(#1f4467, #b9d5f0);
+  --sl-color-primary-800: light-dark(#193550, #d4e5f6);
+  --sl-color-primary-900: light-dark(#122437, #e8f2fb);
+  --sl-color-primary-950: light-dark(#0a1420, #f4f8fd);
 
   /* Danger = Schaltwerk-Rot */
-  --sl-color-danger-50:  #fdf3f2;
-  --sl-color-danger-100: #fdecea;
-  --sl-color-danger-200: #facdc8;
-  --sl-color-danger-300: #f5a7a0;
-  --sl-color-danger-400: #ed7367;
-  --sl-color-danger-500: #dc3535;
-  --sl-color-danger-600: #c72e2e;
-  --sl-color-danger-700: #a32424;
-  --sl-color-danger-800: #832020;
-  --sl-color-danger-900: #641919;
-  --sl-color-danger-950: #370a0a;
+  --sl-color-danger-50:  light-dark(#fdf3f2, #3a2220);
+  --sl-color-danger-100: light-dark(#fdecea, #4d2d2a);
+  --sl-color-danger-200: light-dark(#facdc8, #643834);
+  --sl-color-danger-300: light-dark(#f5a7a0, #834742);
+  --sl-color-danger-400: light-dark(#ed7367, #ab5b54);
+  --sl-color-danger-500: light-dark(#dc3535, #d4736b);
+  --sl-color-danger-600: light-dark(#c72e2e, #f2b8b5);
+  --sl-color-danger-700: light-dark(#a32424, #f9d8d6);
+  --sl-color-danger-800: light-dark(#832020, #fde8e7);
+  --sl-color-danger-900: light-dark(#641919, #fdedec);
+  --sl-color-danger-950: light-dark(#370a0a, #fff5f5);
 
   /* Success = Kalender-Grün */
-  --sl-color-success-50:  #f2f8ed;
-  --sl-color-success-100: #d9ecc4;
-  --sl-color-success-200: #bcdfa0;
-  --sl-color-success-300: #99cb77;
-  --sl-color-success-400: #74b250;
-  --sl-color-success-500: #579336;
-  --sl-color-success-600: #4a7c2f;
-  --sl-color-success-700: #3f6329;
-  --sl-color-success-800: #314b21;
-  --sl-color-success-900: #243619;
-  --sl-color-success-950: #141f0e;
+  --sl-color-success-50:  light-dark(#f2f8ed, #1e2a17);
+  --sl-color-success-100: light-dark(#d9ecc4, #25361c);
+  --sl-color-success-200: light-dark(#bcdfa0, #2d4322);
+  --sl-color-success-300: light-dark(#99cb77, #39552b);
+  --sl-color-success-400: light-dark(#74b250, #4d743a);
+  --sl-color-success-500: light-dark(#579336, #689c4e);
+  --sl-color-success-600: light-dark(#4a7c2f, #8fc46a);
+  --sl-color-success-700: light-dark(#3f6329, #a9d68a);
+  --sl-color-success-800: light-dark(#314b21, #c5e5ae);
+  --sl-color-success-900: light-dark(#243619, #e2f2d6);
+  --sl-color-success-950: light-dark(#141f0e, #f1f9ec);
 
   /* Warning = Schaltwerk-Gelb */
-  --sl-color-warning-50:  #fffaf0;
-  --sl-color-warning-100: #ffebb6;
-  --sl-color-warning-200: #fedb7d;
-  --sl-color-warning-300: #f0c447;
-  --sl-color-warning-400: #d9a924;
-  --sl-color-warning-500: #b5840d;
-  --sl-color-warning-600: #8a6100;
-  --sl-color-warning-700: #6b4b00;
-  --sl-color-warning-800: #4f3700;
-  --sl-color-warning-900: #332300;
-  --sl-color-warning-950: #1d1400;
+  --sl-color-warning-50:  light-dark(#fffaf0, #332914);
+  --sl-color-warning-100: light-dark(#ffebb6, #473a1c);
+  --sl-color-warning-200: light-dark(#fedb7d, #5d4c24);
+  --sl-color-warning-300: light-dark(#f0c447, #78622e);
+  --sl-color-warning-400: light-dark(#d9a924, #997c39);
+  --sl-color-warning-500: light-dark(#b5840d, #be9c48);
+  --sl-color-warning-600: light-dark(#8a6100, #e5c37c);
+  --sl-color-warning-700: light-dark(#6b4b00, #eed49d);
+  --sl-color-warning-800: light-dark(#4f3700, #f5e4bd);
+  --sl-color-warning-900: light-dark(#332300, #fbf5e6);
+  --sl-color-warning-950: light-dark(#1d1400, #fefbf5);
 
   /* Komponenten-Styles */
   --sl-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -95,243 +104,10 @@
   --sl-input-border-radius-medium: var(--schalti-radius-sm);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root,
-  .sl-theme-dark {
-    --schalti-marke: #8fb9e3;
-    --schalti-marke-hell: #1d2c3a;
-    --schalti-marke-dunkel: #b9d5f0;
-    --schalti-auf-akzent: #10202e;
-
-    --schalti-rot: #f2b8b5;
-    --schalti-rot-hell: #3a2220;
-    --schalti-rot-dunkel: #f9d8d6;
-
-    --schalti-gruen: #8fc46a;
-    --schalti-gruen-hell: #1e2a17;
-    --schalti-gruen-dunkel: #a9d68a;
-
-    --schalti-gelb: #e5c37c;
-    --schalti-gelb-hell: #33291480;
-
-    --schalti-text: #dde8ef;
-    --schalti-text-leise: #9db0be;
-    --schalti-linie: #2e3d48;
-    --schalti-flaeche: #1a242c;
-    --schalti-grund: #121a20;
-
-    --sl-panel-background-color: var(--schalti-flaeche);
-    --sl-panel-border-color: var(--schalti-linie);
-
-    /* Shoelace Design-Tokens im Dark Mode (50 = dunkle Flaeche, 900/950 = lesbare helle Schrift) */
-    --sl-color-primary-50:  #1d2c3a;
-    --sl-color-primary-100: #25394b;
-    --sl-color-primary-200: #314b62;
-    --sl-color-primary-300: #426380;
-    --sl-color-primary-400: #5b83a6;
-    --sl-color-primary-500: #749ec7;
-    --sl-color-primary-600: #8fb9e3;
-    --sl-color-primary-700: #b9d5f0;
-    --sl-color-primary-800: #d4e5f6;
-    --sl-color-primary-900: #e8f2fb;
-    --sl-color-primary-950: #f4f8fd;
-
-    --sl-color-danger-50:  #3a2220;
-    --sl-color-danger-100: #4d2d2a;
-    --sl-color-danger-200: #643834;
-    --sl-color-danger-300: #834742;
-    --sl-color-danger-400: #ab5b54;
-    --sl-color-danger-500: #d4736b;
-    --sl-color-danger-600: #f2b8b5;
-    --sl-color-danger-700: #f9d8d6;
-    --sl-color-danger-800: #fde8e7;
-    --sl-color-danger-900: #fdedec;
-    --sl-color-danger-950: #fff5f5;
-
-    --sl-color-success-50:  #1e2a17;
-    --sl-color-success-100: #25361c;
-    --sl-color-success-200: #2d4322;
-    --sl-color-success-300: #39552b;
-    --sl-color-success-400: #4d743a;
-    --sl-color-success-500: #689c4e;
-    --sl-color-success-600: #8fc46a;
-    --sl-color-success-700: #a9d68a;
-    --sl-color-success-800: #c5e5ae;
-    --sl-color-success-900: #e2f2d6;
-    --sl-color-success-950: #f1f9ec;
-
-    --sl-color-warning-50:  #332914;
-    --sl-color-warning-100: #473a1c;
-    --sl-color-warning-200: #5d4c24;
-    --sl-color-warning-300: #78622e;
-    --sl-color-warning-400: #997c39;
-    --sl-color-warning-500: #be9c48;
-    --sl-color-warning-600: #e5c37c;
-    --sl-color-warning-700: #eed49d;
-    --sl-color-warning-800: #f5e4bd;
-    --sl-color-warning-900: #fbf5e6;
-    --sl-color-warning-950: #fefbf5;
-  }
-}
-
 /* Explizite Theme-Wahl (z.B. via Benutzereinstellungen) ueberschreibt die
-   Systemeinstellung. Wird per data-theme Attribut auf <html> gesetzt; ohne
-   dieses Attribut greift weiterhin ausschliesslich prefers-color-scheme. */
-:root[data-theme="dark"],
-.sl-theme-dark {
-  --schalti-marke: #8fb9e3;
-  --schalti-marke-hell: #1d2c3a;
-  --schalti-marke-dunkel: #b9d5f0;
-  --schalti-auf-akzent: #10202e;
-
-  --schalti-rot: #f2b8b5;
-  --schalti-rot-hell: #3a2220;
-  --schalti-rot-dunkel: #f9d8d6;
-
-  --schalti-gruen: #8fc46a;
-  --schalti-gruen-hell: #1e2a17;
-  --schalti-gruen-dunkel: #a9d68a;
-
-  --schalti-gelb: #e5c37c;
-  --schalti-gelb-hell: #33291480;
-
-  --schalti-text: #dde8ef;
-  --schalti-text-leise: #9db0be;
-  --schalti-linie: #2e3d48;
-  --schalti-flaeche: #1a242c;
-  --schalti-grund: #121a20;
-
-  --sl-panel-background-color: var(--schalti-flaeche);
-  --sl-panel-border-color: var(--schalti-linie);
-
-  /* Shoelace Design-Tokens im Dark Mode */
-  --sl-color-primary-50:  #1d2c3a;
-  --sl-color-primary-100: #25394b;
-  --sl-color-primary-200: #314b62;
-  --sl-color-primary-300: #426380;
-  --sl-color-primary-400: #5b83a6;
-  --sl-color-primary-500: #749ec7;
-  --sl-color-primary-600: #8fb9e3;
-  --sl-color-primary-700: #b9d5f0;
-  --sl-color-primary-800: #d4e5f6;
-  --sl-color-primary-900: #e8f2fb;
-  --sl-color-primary-950: #f4f8fd;
-
-  --sl-color-danger-50:  #3a2220;
-  --sl-color-danger-100: #4d2d2a;
-  --sl-color-danger-200: #643834;
-  --sl-color-danger-300: #834742;
-  --sl-color-danger-400: #ab5b54;
-  --sl-color-danger-500: #d4736b;
-  --sl-color-danger-600: #f2b8b5;
-  --sl-color-danger-700: #f9d8d6;
-  --sl-color-danger-800: #fde8e7;
-  --sl-color-danger-900: #fdedec;
-  --sl-color-danger-950: #fff5f5;
-
-  --sl-color-success-50:  #1e2a17;
-  --sl-color-success-100: #25361c;
-  --sl-color-success-200: #2d4322;
-  --sl-color-success-300: #39552b;
-  --sl-color-success-400: #4d743a;
-  --sl-color-success-500: #689c4e;
-  --sl-color-success-600: #8fc46a;
-  --sl-color-success-700: #a9d68a;
-  --sl-color-success-800: #c5e5ae;
-  --sl-color-success-900: #e2f2d6;
-  --sl-color-success-950: #f1f9ec;
-
-  --sl-color-warning-50:  #332914;
-  --sl-color-warning-100: #473a1c;
-  --sl-color-warning-200: #5d4c24;
-  --sl-color-warning-300: #78622e;
-  --sl-color-warning-400: #997c39;
-  --sl-color-warning-500: #be9c48;
-  --sl-color-warning-600: #e5c37c;
-  --sl-color-warning-700: #eed49d;
-  --sl-color-warning-800: #f5e4bd;
-  --sl-color-warning-900: #fbf5e6;
-  --sl-color-warning-950: #fefbf5;
-}
-
-:root[data-theme="light"] {
-  --schalti-marke: #2b5883;
-  --schalti-marke-hell: #dbe8ef;
-  --schalti-marke-dunkel: #1f4467;
-  --schalti-auf-akzent: #ffffff;
-
-  --schalti-rot: #c72e2e;
-  --schalti-rot-hell: #fdecea;
-  --schalti-rot-dunkel: #a32424;
-
-  --schalti-gruen: #4a7c2f;
-  --schalti-gruen-hell: #d9ecc4;
-  --schalti-gruen-dunkel: #3f6329;
-
-  --schalti-gelb: #8a6100;
-  --schalti-gelb-hell: #ffebb6;
-
-  --schalti-text: #2b5883;
-  --schalti-text-leise: #4d6b87;
-  --schalti-linie: #cfdbe2;
-  --schalti-flaeche: #ffffff;
-  --schalti-grund: #ebefe7;
-
-  --sl-panel-background-color: var(--schalti-flaeche);
-  --sl-panel-border-color: var(--schalti-linie);
-
-  /* Primary Light */
-  --sl-color-primary-50:  #f0f5f8;
-  --sl-color-primary-100: #dbe8ef;
-  --sl-color-primary-200: #b8d2df;
-  --sl-color-primary-300: #8aaec4;
-  --sl-color-primary-400: #5b87a6;
-  --sl-color-primary-500: #3c6b93;
-  --sl-color-primary-600: #2b5883;
-  --sl-color-primary-700: #1f4467;
-  --sl-color-primary-800: #193550;
-  --sl-color-primary-900: #122437;
-  --sl-color-primary-950: #0a1420;
-
-  /* Danger Light */
-  --sl-color-danger-50:  #fdf3f2;
-  --sl-color-danger-100: #fdecea;
-  --sl-color-danger-200: #facdc8;
-  --sl-color-danger-300: #f5a7a0;
-  --sl-color-danger-400: #ed7367;
-  --sl-color-danger-500: #dc3535;
-  --sl-color-danger-600: #c72e2e;
-  --sl-color-danger-700: #a32424;
-  --sl-color-danger-800: #832020;
-  --sl-color-danger-900: #641919;
-  --sl-color-danger-950: #370a0a;
-
-  /* Success Light */
-  --sl-color-success-50:  #f2f8ed;
-  --sl-color-success-100: #d9ecc4;
-  --sl-color-success-200: #bcdfa0;
-  --sl-color-success-300: #99cb77;
-  --sl-color-success-400: #74b250;
-  --sl-color-success-500: #579336;
-  --sl-color-success-600: #4a7c2f;
-  --sl-color-success-700: #3f6329;
-  --sl-color-success-800: #314b21;
-  --sl-color-success-900: #243619;
-  --sl-color-success-950: #141f0e;
-
-  /* Warning Light */
-  --sl-color-warning-50:  #fffaf0;
-  --sl-color-warning-100: #ffebb6;
-  --sl-color-warning-200: #fedb7d;
-  --sl-color-warning-300: #f0c447;
-  --sl-color-warning-400: #d9a924;
-  --sl-color-warning-500: #b5840d;
-  --sl-color-warning-600: #8a6100;
-  --sl-color-warning-700: #6b4b00;
-  --sl-color-warning-800: #4f3700;
-  --sl-color-warning-900: #332300;
-  --sl-color-warning-950: #1d1400;
-}
+   Systemeinstellung. Laeuft synchron mit dem Theme-Script aus base.html. */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
 
 /* Verhindert FOUC (Flash of Unstyled Content) bei noch nicht definierten Custom Elements */
 sl-dialog:not(:defined) {
@@ -400,24 +176,10 @@ main h1,
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(235, 239, 231, 0.88);
+  background: color-mix(in srgb, var(--schalti-grund) 88%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--schalti-linie);
-}
-
-@media (prefers-color-scheme: dark) {
-  .schalti-header {
-    background: rgba(18, 26, 32, 0.88);
-  }
-}
-
-:root[data-theme="dark"] .schalti-header {
-  background: rgba(18, 26, 32, 0.88);
-}
-
-:root[data-theme="light"] .schalti-header {
-  background: rgba(235, 239, 231, 0.88);
 }
 
 .schalti-nav-container {
@@ -467,6 +229,9 @@ main h1,
   margin-top: 0;
   margin-bottom: 0;
   padding: 0;
+}
+.schalti-nav-user > li {
+  margin-left: 0.5rem;
 }
 
 /* --- Bootstrap-Style Responsive Navbar Collapse (<= 768px) --- */
@@ -524,6 +289,13 @@ main h1,
   }
 }
 
+/* --- Flash-Messages Container --- */
+.schalti-flash-container {
+  max-width: 1240px;
+  margin: 1rem auto 0 auto;
+  padding: 0 1.25rem;
+}
+
 /* --- Hauptinhalt Container --- */
 .schalti-main {
   flex: 1;
@@ -531,6 +303,16 @@ main h1,
   width: 100%;
   margin: 0 auto;
   padding: 1.5rem 1.25rem 3rem 1.25rem;
+}
+
+/* --- Footer --- */
+.schalti-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--schalti-linie);
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  color: var(--schalti-text-leise);
+  font-size: 0.85rem;
 }
 
 /* --- Grids & Flexbox --- */
@@ -628,16 +410,18 @@ main h1,
   color: var(--schalti-marke-dunkel);
 }
 
+/* Status-Dots: greifen auf die Shoelace-Tokens zu und sind damit automatisch
+   dark-mode-fähig (vorher hardcoded Hex-Werte mit schlechtem Kontrast im Dark Mode). */
 .status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   display: inline-block;
 }
-.status-dot.green { background: #4a7c2f; }
-.status-dot.red { background: #c72e2e; }
-.status-dot.yellow { background: #d99b00; }
-.status-dot.blue { background: #2b5883; }
+.status-dot.green { background: var(--sl-color-success-600); }
+.status-dot.red { background: var(--sl-color-danger-600); }
+.status-dot.yellow { background: var(--sl-color-warning-500); }
+.status-dot.blue { background: var(--sl-color-primary-600); }
 
 /* --- Callout & Hinweis-Boxen --- */
 .schalti-callout {
