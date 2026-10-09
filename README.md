@@ -14,7 +14,7 @@ Alle vier Consumer-Repos sind auf `requirements.txt`-Ebene per Commit-Hash gepin
 ```bash
 pip install -e /home/jonas/Workspace/schalti_ui
 # oder bei Git-Deployment:
-# git+https://github.com/JonSchalti/schalti_ui.git
+# git+https://github.com/YoMamasNerd/schalti_ui.git
 ```
 
 ### 2. In `settings.py`:
@@ -22,6 +22,18 @@ pip install -e /home/jonas/Workspace/schalti_ui
 INSTALLED_APPS = [
     ...,
     "schalti_ui",
+]
+
+TEMPLATES = [
+    {
+        # ...
+        "OPTIONS": {
+            "context_processors": [
+                # ...
+                "schalti_ui.context_processors.apps_registry",
+            ],
+        },
+    },
 ]
 ```
 
@@ -42,3 +54,48 @@ INSTALLED_APPS = [
   </sl-card>
 {% endblock %}
 ```
+
+---
+
+## ⚙️ Optionale Settings
+
+| Setting | Default | Zweck |
+| --- | --- | --- |
+| `SCHALTI_APPS_REGISTRY_URL` | `""` (leer) | JSON-Registry für den App-Switcher; ohne Wert wird der Switcher nicht gerendert |
+| `SCHALTI_ADMIN_URL` | `"/admin/"` | Ziel des „Django Admin"-Eintrags im User-Menü |
+| `SCHALTI_LOGOUT_URL` | `"/accounts/logout/"` | Ziel des „Abmelden"-Eintrags im User-Menü |
+| `SCHALTI_SITE_NAME` | `SITE_NAME` | App-Name für Titel, Header und Footer |
+
+---
+
+## 🧪 Tests & Lint
+
+```bash
+pip install -e ".[dev]"
+pytest -v
+ruff check .
+```
+
+CI läuft auf jedem Push und Pull Request (`.github/workflows/ci.yml`, Python 3.11–3.13).
+
+---
+
+## 💡 Hinweise für Consumer-Apps
+
+- **Browser-Support:** `schalti.css` nutzt `light-dark()` und `color-mix()`
+  (Chrome/Edge ≥ 123, Firefox ≥ 120, Safari ≥ 17.5). Dark Mode folgt weiterhin
+  der Systemeinstellung; `data-theme="dark"`/`"light"` auf `<html>` erzwingt
+  das Theme wie gehabt, das Theme-Skript in `base.html` synchronisiert
+  `.sl-theme-dark` unverändert mit.
+- **htmx & Schalti-Script laden mit `defer`:** Wer in Templates inline
+  `htmx.config.*` setzt, muss das in einen `DOMContentLoaded`-Listener
+  verpacken. Für `hx-*`-Attribute im Markup ändert sich nichts.
+- **Cache-Busting:** Statt manueller `?v=`-Parameter lässt sich in der
+  jeweiligen Consumer-App Djangos `ManifestStaticFilesStorage` aktivieren:
+```python
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"},
+}
+```
+  Dann greifen gehashte Dateinamen und die `?v=`-Suffixe können entfallen.

@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</title>
+  <title>{% block title %}{% firstof SCHALTI_SITE_NAME SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</title>
 
   <!-- Shoelace Basis-Styles (hell + dunkel - dark.css zielt auf .sl-theme-dark
        und ist ohne diese Klasse inert, siehe Theme-Script unten) -->
   <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/light.css' %}">
   <link rel="stylesheet" href="{% static 'schalti_ui/shoelace/themes/dark.css' %}">
   <!-- Schalti Theme Tokens & Layout -->
-  <link rel="stylesheet" href="{% static 'schalti_ui/css/schalti.css' %}?v=20260926-1">
+  <link rel="stylesheet" href="{% static 'schalti_ui/css/schalti.css' %}?v=20261009-1">
 
   <!-- Shoelace-Komponenten (Buttons, Dropdowns, Selects, ...) reagieren auf die
        Klasse .sl-theme-dark auf <html>, nicht auf unser eigenes data-theme
@@ -46,9 +46,10 @@
   <!-- Shoelace Web Components JS (ESM Bundle mit direkter Registrierung & Autoloader) -->
   <script type="module" src="{% static 'schalti_ui/js/shoelace-bundle.js' %}" data-shoelace="{% static 'schalti_ui/shoelace' %}"></script>
 
-  <!-- HTMX & Schalti Bridge -->
-  <script src="{% static 'schalti_ui/htmx/htmx.min.js' %}"></script>
-  <script src="{% static 'schalti_ui/js/schalti.js' %}?v=20260926-1"></script>
+  <!-- HTMX & Schalti Bridge (defer: blockieren den First Paint nicht,
+       Ausführungsreihenfolge bleibt erhalten) -->
+  <script defer src="{% static 'schalti_ui/htmx/htmx.min.js' %}"></script>
+  <script defer src="{% static 'schalti_ui/js/schalti.js' %}?v=20260926-1"></script>
 
   {% block extra_head %}{% endblock %}
 </head>
@@ -64,7 +65,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <path d="M12 6v6l4 2"></path>
         </svg>
-        <span>{% block app_title %}{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</span>
+        <span>{% block app_title %}{% firstof SCHALTI_SITE_NAME SITE_NAME site_name "Fahrschule Schaltwerk" %}{% endblock %}</span>
         {% endblock %}
       </a>
 
@@ -76,7 +77,7 @@
       <ul class="schalti-nav-links schalti-nav-user">
         {% block user_menu %}
         {% if user.is_authenticated %}
-          <li style="margin-left: 0.5rem;">
+          <li>
             <sl-dropdown hoist>
               <sl-button slot="trigger" size="small" caret pill>
                 <sl-icon slot="prefix" name="person-circle"></sl-icon>
@@ -84,9 +85,9 @@
               </sl-button>
               <sl-menu>
                 {% if user.is_staff %}
-                  <sl-menu-item value="admin" href="/admin/">Django Admin</sl-menu-item>
+                  <sl-menu-item value="admin" href="{{ SCHALTI_ADMIN_URL|default:'/admin/' }}">Django Admin</sl-menu-item>
                 {% endif %}
-                <sl-menu-item value="logout" href="/accounts/logout/">Abmelden</sl-menu-item>
+                <sl-menu-item value="logout" href="{{ SCHALTI_LOGOUT_URL|default:'/accounts/logout/' }}">Abmelden</sl-menu-item>
               </sl-menu>
             </sl-dropdown>
           </li>
@@ -101,10 +102,10 @@
 
   <!-- Flash-Messages -->
   {% if messages %}
-    <div style="max-width: 1240px; margin: 1rem auto 0 auto; padding: 0 1.25rem;">
+    <div class="schalti-flash-container">
       {% for message in messages %}
-        <sl-alert variant="{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% else %}primary{% endif %}" open closable duration="5000">
-          <sl-icon slot="icon" name="info-circle"></sl-icon>
+        <sl-alert variant="{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% else %}primary{% endif %}" open closable duration="5000">
+          <sl-icon slot="icon" name="{% if message.tags == 'error' %}exclamation-octagon{% elif message.tags == 'success' %}check2-circle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></sl-icon>
           {{ message }}
         </sl-alert>
       {% endfor %}
@@ -116,9 +117,9 @@
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="schalti-footer" style="margin-top: auto; border-top: 1px solid var(--schalti-linie); padding: 1.5rem 1.25rem; text-align: center; color: var(--schalti-text-leise); font-size: 0.85rem;">
+  <footer class="schalti-footer">
     {% block footer %}
-      <span>{% firstof SITE_NAME site_name "Fahrschule Schaltwerk" %}</span>
+      <span>{% firstof SCHALTI_SITE_NAME SITE_NAME site_name "Fahrschule Schaltwerk" %}</span>
     {% endblock %}
   </footer>
 
