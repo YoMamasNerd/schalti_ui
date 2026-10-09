@@ -57,6 +57,6 @@ def currency_de(value):
     if value is None or value == "":
         return "0,00 €"
     try:
-        return f"{number_format(Decimal(str(value)), decimal_pos=2)} €"
+        return f"{number_format(Decimal(str(value)), decimal_pos=2, force_grouping=True)} €"
     except (InvalidOperation, ValueError, TypeError):
         return f"{value} €"
