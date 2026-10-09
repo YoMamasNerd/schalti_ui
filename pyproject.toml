@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "schalti-ui"
-version = "0.1.0"
+version = "0.2.0"
 description = "Schalti UI - Einheitliches Design-System und Shoelace Web Components für Fahrschule Schaltwerk"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -14,6 +14,9 @@ authors = [
 classifiers = [
     "Framework :: Django",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
     "django>=4.2",
@@ -23,8 +26,27 @@ dependencies = [
 where = ["."]
 include = ["schalti_ui*"]
 
+# Explizite Includes statt static/**/*: Editor-/Tooling-Metadaten von Shoelace
+# (custom-elements.json, web-types.json, vscode.html-custom-data.json, react/,
+# TypeScript-Deklarationen, events/) landen so nicht mehr im Wheel und sparen
+# über 1 MB pro Installation/Deployment. Die von base.html referenzierten
+# Assets (css/, htmx/, js/, shoelace/ Runtime-Dateien) sind vollständig abgedeckt.
 [tool.setuptools.package-data]
 schalti_ui = [
-    "static/**/*",
     "templates/**/*",
+    "static/schalti_ui/css/*",
+    "static/schalti_ui/htmx/*",
+    "static/schalti_ui/js/*",
+    "static/schalti_ui/shoelace/*.js",
+    "static/schalti_ui/shoelace/assets/**/*",
+    "static/schalti_ui/shoelace/chunks/**/*",
+    "static/schalti_ui/shoelace/components/**/*",
+    "static/schalti_ui/shoelace/internal/**/*",
+    "static/schalti_ui/shoelace/styles/**/*",
+    "static/schalti_ui/shoelace/themes/*.css",
+    "static/schalti_ui/shoelace/translations/*.js",
+    "static/schalti_ui/shoelace/utilities/*.js",
 ]
+
+[tool.ruff]
+line-length = 110
