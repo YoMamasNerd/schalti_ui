@@ -1092,3 +1092,132 @@ tr.invoice-row:hover > * {
   overflow: hidden;
   transition: height 0.35s ease;
 }
+
+/* ==========================================================================
+   13. Pagination & Breadcrumbs
+   ========================================================================== */
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-left: 0;
+  list-style: none;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.pagination.justify-content-center {
+  justify-content: center;
+}
+.pagination.justify-content-end {
+  justify-content: flex-end;
+}
+.pagination.justify-content-start {
+  justify-content: flex-start;
+}
+
+.page-item {
+  display: inline-flex;
+}
+
+.page-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--schalti-text);
+  text-decoration: none;
+  background-color: var(--schalti-flaeche);
+  border: 1px solid var(--schalti-linie);
+  border-radius: var(--schalti-radius-sm) !important;
+  box-shadow: 0 1px 2px rgba(20, 35, 25, 0.04);
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.page-link:hover {
+  color: var(--schalti-marke);
+  background-color: color-mix(in srgb, var(--schalti-marke) 8%, var(--schalti-flaeche));
+  border-color: var(--schalti-marke);
+  text-decoration: none;
+}
+
+.page-item.active .page-link,
+.page-link.active {
+  z-index: 2;
+  color: var(--schalti-auf-akzent) !important;
+  background-color: var(--schalti-marke) !important;
+  border-color: var(--schalti-marke) !important;
+  font-weight: 600;
+  box-shadow: 0 2px 4px color-mix(in srgb, var(--schalti-marke) 30%, transparent);
+}
+
+.page-item.disabled .page-link,
+.page-link.disabled {
+  color: var(--schalti-text-leise);
+  opacity: 0.45;
+  background-color: var(--schalti-flaeche);
+  border-color: var(--schalti-linie);
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.pagination-sm .page-link {
+  min-width: 1.85rem;
+  height: 1.85rem;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  border-radius: var(--schalti-radius-sm) !important;
+}
+
+.pagination-lg .page-link {
+  min-width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  border-radius: var(--schalti-radius-sm) !important;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: 1rem;
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--schalti-text-leise);
+}
+
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  padding: 0 0.5rem;
+  color: var(--schalti-text-leise);
+}
+
+.breadcrumb-item a {
+  color: var(--schalti-marke);
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: var(--schalti-text);
+  font-weight: 500;
+}
