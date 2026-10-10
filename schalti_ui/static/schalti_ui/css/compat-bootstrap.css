@@ -10,6 +10,32 @@
  */
 
 /* ==========================================================================
+   0. Variables & Aliases
+   ========================================================================== */
+
+:root {
+  --bs-body-bg: var(--schalti-flaeche);
+  --bs-body-color: var(--schalti-text);
+  --bs-secondary-color: var(--schalti-text-leise);
+  --bs-secondary-bg: color-mix(in srgb, var(--schalti-marke) 6%, var(--schalti-flaeche));
+  --bs-tertiary-bg: color-mix(in srgb, var(--schalti-marke) 4%, var(--schalti-flaeche));
+  --bs-border-color: var(--schalti-linie);
+  --bs-border-width: 1px;
+  --bs-border-radius: var(--schalti-radius);
+  --bs-border-radius-sm: var(--schalti-radius-sm);
+  --bs-border-radius-pill: var(--schalti-radius-pill);
+  --bs-table-bg: var(--schalti-flaeche);
+  --bs-table-color: var(--schalti-text);
+  --bs-table-border-color: var(--schalti-linie);
+  --bs-table-striped-bg: color-mix(in srgb, var(--schalti-marke) 2.5%, var(--schalti-flaeche));
+  --bs-table-hover-bg: color-mix(in srgb, var(--schalti-marke) 6%, var(--schalti-flaeche));
+  --bs-warning-bg-subtle: color-mix(in srgb, var(--schalti-gelb) 12%, var(--schalti-flaeche));
+  --bs-danger-bg-subtle: color-mix(in srgb, var(--schalti-rot) 10%, var(--schalti-flaeche));
+  --bs-success-bg-subtle: color-mix(in srgb, var(--schalti-gruen) 10%, var(--schalti-flaeche));
+  --bs-primary-bg-subtle: color-mix(in srgb, var(--schalti-marke) 10%, var(--schalti-flaeche));
+}
+
+/* ==========================================================================
    1. Grid & Layout (row, col, gutters)
    ========================================================================== */
 
@@ -339,7 +365,7 @@
    ========================================================================== */
 
 .bg-body, .bg-body-tertiary { background-color: var(--schalti-flaeche) !important; }
-.bg-body-secondary { background-color: var(--schalti-grund) !important; }
+.bg-body-secondary { background-color: color-mix(in srgb, var(--schalti-marke) 6%, var(--schalti-flaeche)) !important; }
 .bg-transparent { background-color: transparent !important; }
 .bg-white { background-color: var(--schalti-flaeche) !important; }
 
@@ -350,12 +376,12 @@
 .bg-warning { background-color: var(--schalti-gelb) !important; color: #fff !important; }
 .bg-info { background-color: var(--schalti-marke-hell) !important; color: var(--schalti-text) !important; }
 
-.bg-primary-subtle { background-color: var(--schalti-marke-hell) !important; color: var(--schalti-marke) !important; }
-.bg-success-subtle { background-color: var(--schalti-gruen-hell) !important; color: var(--schalti-gruen-dunkel) !important; }
-.bg-danger-subtle { background-color: var(--schalti-rot-hell) !important; color: var(--schalti-rot-dunkel) !important; }
-.bg-warning-subtle { background-color: var(--schalti-gelb-hell) !important; color: var(--schalti-gelb) !important; }
-.bg-secondary-subtle { background-color: var(--schalti-grund) !important; color: var(--schalti-text) !important; }
-.bg-info-subtle { background-color: var(--schalti-marke-hell) !important; color: var(--schalti-marke) !important; }
+.bg-primary-subtle { background-color: color-mix(in srgb, var(--schalti-marke) 10%, var(--schalti-flaeche)) !important; color: var(--schalti-marke) !important; }
+.bg-success-subtle { background-color: color-mix(in srgb, var(--schalti-gruen) 12%, var(--schalti-flaeche)) !important; color: var(--schalti-gruen-dunkel) !important; }
+.bg-danger-subtle { background-color: color-mix(in srgb, var(--schalti-rot) 12%, var(--schalti-flaeche)) !important; color: var(--schalti-rot-dunkel) !important; }
+.bg-warning-subtle { background-color: color-mix(in srgb, var(--schalti-gelb) 14%, var(--schalti-flaeche)) !important; color: var(--schalti-gelb) !important; }
+.bg-secondary-subtle { background-color: color-mix(in srgb, var(--schalti-marke) 5%, var(--schalti-flaeche)) !important; color: var(--schalti-text) !important; }
+.bg-info-subtle { background-color: color-mix(in srgb, var(--schalti-marke) 10%, var(--schalti-flaeche)) !important; color: var(--schalti-marke) !important; }
 .bg-opacity-10 { opacity: 0.9; }
 
 .border { border: 1px solid var(--schalti-linie) !important; }
@@ -801,32 +827,173 @@
 .table-responsive {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  background-color: var(--schalti-flaeche);
+  border: 1px solid var(--schalti-linie);
+  border-radius: var(--schalti-radius);
+  box-shadow: var(--schalti-schatten);
+  margin-bottom: 1.25rem;
 }
+
+/* Card-nested tables: inherit card frame */
+.card > .table-responsive,
+.card > .table,
+.card-body > .table-responsive,
+.card-body > .table {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  margin-bottom: 0;
+}
+
 .table {
   width: 100%;
-  margin-bottom: 1rem;
-  vertical-align: top;
-  border-color: var(--schalti-linie);
+  margin-bottom: 0;
+  vertical-align: middle;
   border-collapse: collapse;
+  background-color: var(--schalti-flaeche);
+  color: var(--schalti-text);
+  font-size: 0.92rem;
 }
-.table th, .table td {
-  padding: 0.65rem 0.75rem;
-  border-bottom: 1px solid var(--schalti-linie);
+
+.table > thead {
+  vertical-align: bottom;
+  background-color: color-mix(in srgb, var(--schalti-marke) 6%, var(--schalti-flaeche));
 }
-.table th {
+
+.table > thead th {
+  padding: 0.8rem 1rem;
   font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--schalti-marke);
-  text-align: left;
+  background-color: inherit;
+  border-bottom: 2px solid var(--schalti-linie);
+  white-space: nowrap;
 }
-.table-hover tbody tr:hover {
-  background-color: var(--schalti-marke-hell);
+
+.table-responsive > .table > thead:first-child > tr:first-child > th:first-child,
+.card > .table-responsive:first-child > .table > thead:first-child > tr:first-child > th:first-child {
+  border-top-left-radius: calc(var(--schalti-radius) - 1px);
 }
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: color-mix(in srgb, var(--schalti-grund) 40%, transparent);
+
+.table-responsive > .table > thead:first-child > tr:first-child > th:last-child,
+.card > .table-responsive:first-child > .table > thead:first-child > tr:first-child > th:last-child {
+  border-top-right-radius: calc(var(--schalti-radius) - 1px);
 }
-.table-sm th, .table-sm td {
-  padding: 0.35rem 0.5rem;
-  font-size: 0.875rem;
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th {
+  padding: 0.8rem 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--schalti-linie);
+  color: inherit;
+  background-color: transparent;
+  transition: background-color 0.12s ease;
+}
+
+.table > tbody > tr:last-child > td,
+.table > tbody > tr:last-child > th {
+  border-bottom: none;
+}
+
+.table-responsive > .table > tbody > tr:last-child > td:first-child,
+.card > .table-responsive:last-child > .table > tbody > tr:last-child > td:first-child {
+  border-bottom-left-radius: calc(var(--schalti-radius) - 1px);
+}
+
+.table-responsive > .table > tbody > tr:last-child > td:last-child,
+.card > .table-responsive:last-child > .table > tbody > tr:last-child > td:last-child {
+  border-bottom-right-radius: calc(var(--schalti-radius) - 1px);
+}
+
+.table-sm > thead th {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.75rem;
+}
+
+.table-sm > tbody > tr > td,
+.table-sm > tbody > tr > th {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.88rem;
+}
+
+.table-hover > tbody > tr:hover,
+.table-hover > tbody > tr:hover > *,
+tr[data-href]:hover,
+tr[data-href]:hover > *,
+tr.invoice-row:hover,
+tr.invoice-row:hover > * {
+  background-color: color-mix(in srgb, var(--schalti-marke) 6%, var(--schalti-flaeche)) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd),
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: color-mix(in srgb, var(--schalti-marke) 2.5%, var(--schalti-flaeche));
+}
+
+.table tr.bg-warning-subtle,
+.table tr.bg-warning-subtle > *,
+.table-cards tr.bg-warning-subtle,
+.table-cards tr.bg-warning-subtle > * {
+  background-color: color-mix(in srgb, var(--schalti-gelb) 12%, var(--schalti-flaeche)) !important;
+  color: var(--schalti-text) !important;
+}
+
+.table tr.bg-danger-subtle,
+.table tr.bg-danger-subtle > *,
+.table-cards tr.bg-danger-subtle,
+.table-cards tr.bg-danger-subtle > * {
+  background-color: color-mix(in srgb, var(--schalti-rot) 10%, var(--schalti-flaeche)) !important;
+  color: var(--schalti-text) !important;
+}
+
+.table tr.bg-success-subtle,
+.table tr.bg-success-subtle > *,
+.table-cards tr.bg-success-subtle,
+.table-cards tr.bg-success-subtle > * {
+  background-color: color-mix(in srgb, var(--schalti-gruen) 10%, var(--schalti-flaeche)) !important;
+  color: var(--schalti-text) !important;
+}
+
+.table tr.bg-primary-subtle,
+.table tr.bg-primary-subtle > *,
+.table-cards tr.bg-primary-subtle,
+.table-cards tr.bg-primary-subtle > * {
+  background-color: color-mix(in srgb, var(--schalti-marke) 10%, var(--schalti-flaeche)) !important;
+  color: var(--schalti-text) !important;
+}
+
+.table a:not(.btn):not(.badge):not(.status-pill) {
+  color: var(--schalti-marke);
+  text-decoration: none;
+}
+.table a:not(.btn):not(.badge):not(.status-pill):hover {
+  text-decoration: underline;
+  color: var(--schalti-marke-dunkel);
+}
+
+.align-middle,
+.table.align-middle td,
+.table.align-middle th,
+.table td.align-middle,
+.table th.align-middle {
+  vertical-align: middle !important;
+}
+
+.align-top,
+.table.align-top td,
+.table.align-top th {
+  vertical-align: top !important;
+}
+
+.align-bottom,
+.table.align-bottom td,
+.table.align-bottom th {
+  vertical-align: bottom !important;
 }
 
 /* ==========================================================================
