@@ -29,7 +29,7 @@ dev = [
     # deterministisch sein. Ruffs Default-Regelset wurde 2026 massiv
     # erweitert - Updates gehören bewusst in einen Commit, nicht per Zufall
     # in den CI-Lauf.
-    "ruff==0.17.0",
+    "ruff==0.17.2",
 ]
 
 [tool.setuptools.packages.find]
